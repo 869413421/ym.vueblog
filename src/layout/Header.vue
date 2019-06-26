@@ -1,7 +1,6 @@
 <template>
   <div id="header">
     <el-header>
-      
       <el-menu
         :default-active="activeIndex"
         class="el-menu-demo"
@@ -11,7 +10,9 @@
         text-color="#FFFFFF"
         active-text-color="#E1F2F1"
       >
-        <el-menu-item index="1"><el-avatar :size="50"></el-avatar></el-menu-item>
+        <el-menu-item index="1">
+          <el-avatar :size="50"></el-avatar>
+        </el-menu-item>
         <el-submenu index="2">
           <template slot="title">我的工作台</template>
           <el-menu-item index="2-1">选项1</el-menu-item>
@@ -49,4 +50,12 @@ export default {
   }
 };
 </script>
+
+<style>
+.el-header {
+  position: flex;
+  top: 0%;
+  background-color: #24292e;
+}
+</style>
 
