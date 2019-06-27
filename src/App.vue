@@ -26,16 +26,4 @@ body {
   line-height: 60px;
   padding: 0 0px;
 }
-
-.el-header {
-  position: flex;
-  top: 0%;
-  background-color: #24292E;
-}
-.el-main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-  line-height: 100%;
-}
 </style>
