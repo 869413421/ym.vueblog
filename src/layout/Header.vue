@@ -42,14 +42,14 @@
           </div>
         </el-col>
 
-        <el-col :span="8">
+       <!--  <el-col :span="8">
           <div class="grid-content bg-purple-dark"></div>
-        </el-col>
+        </el-col> -->
 
-        <el-col :span="3">
+        <el-col :span="3" :offset="8">
           <div  v-if="login">
             <el-menu
-              class="el-menu-demo"
+              class="el-menu-demo header-right-menu"
               mode="horizontal"
               @select="handleSelect"
               background-color="#24292E"
@@ -58,9 +58,21 @@
             >
               <el-menu-item>
                 <div class="el-icon-bell icon-class"></div>
-                <div class="el-icon-plus icon-class"></div>
-                <el-avatar :size="35"></el-avatar>
               </el-menu-item>
+               <el-menu-item>
+                <div class="el-icon-plus icon-class"></div>
+              </el-menu-item>
+        <!--        <el-menu-item>
+                <el-avatar :size="35"></el-avatar>
+              </el-menu-item> -->
+              <el-submenu index="2">
+              <template slot="title">
+                <el-avatar :size="35"></el-avatar>
+              </template>
+              <el-menu-item index="2-1">选项1</el-menu-item>
+              <el-menu-item index="2-2">选项2</el-menu-item>
+              <el-menu-item index="2-3">选项3</el-menu-item>
+            </el-submenu>
             </el-menu>
           </div>
 
@@ -105,5 +117,9 @@ export default {
 .icon-class {
   color: aliceblue;
 }
+.header-right-menu li.el-menu-item{
+	padding: 0;
+}
+
 </style>
 
