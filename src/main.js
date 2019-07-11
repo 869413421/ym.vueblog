@@ -9,7 +9,9 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
-Vue.prototype.$http=Axios
+Axios.defaults.baseURL = 'http://ymbbs.com/api/'
+Axios.defaults.withCredentials = true;
+Vue.prototype.axios=Axios
 Vue.use(Element)
 
 /* eslint-disable no-new */

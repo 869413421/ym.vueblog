@@ -9,4 +9,11 @@ export default {
   name: "Footer"
 };
 </script>
+<style>
+.el-footer {
+  position: flex;
+  bottom: 0%;
+  background-color: #24292e;
+}
+</style>
 
