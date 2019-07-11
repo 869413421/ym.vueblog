@@ -4,7 +4,7 @@
       <el-header>
         <el-col :span="1">
           <div>
-            <img src alt />
+            <img src alt>
           </div>
         </el-col>
 
@@ -27,7 +27,11 @@
 
                 <!-- 二级菜单 -->
                 <template v-for="itemChild in item.child">
-                  <el-submenu v-if="itemChild.child&&itemChild.child.length" :index="itemChild.id" :key="itemChild.id">
+                  <el-submenu
+                    v-if="itemChild.child&&itemChild.child.length"
+                    :index="itemChild.id"
+                    :key="itemChild.id"
+                  >
                     <template slot="title">
                       <span>{{itemChild.name}}</span>
                     </template>
@@ -82,9 +86,7 @@
               <el-menu-item>
                 <div class="el-icon-plus icon-class"></div>
               </el-menu-item>
-              <!--        <el-menu-item>
-                <el-avatar :size="35"></el-avatar>
-              </el-menu-item>-->
+
               <el-submenu index="2">
                 <template slot="title">
                   <el-avatar :size="35"></el-avatar>
@@ -97,8 +99,8 @@
           </div>
 
           <div v-if="!login">
-            <el-button type="info" size="small" @click="changRoute">登陆</el-button>
-            <el-button type="info" size="small">注册</el-button>
+            <el-button type="info" size="small" @click="changRoute('login')">登陆</el-button>
+            <el-button type="info" size="small" @click="changRoute('register')">注册</el-button>
           </div>
         </el-col>
       </el-header>
@@ -121,8 +123,10 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    changRoute(){
-      this.$router.push('Login');
+    changRoute(router) {
+      this.$router.push({
+        path: router
+      });
     }
   },
   created() {
@@ -137,11 +141,6 @@ export default {
 </script>
 
 <style>
-.el-header {
-  position: flex;
-  top: 0%;
-  background-color: #24292e;
-}
 .grid-content {
   border-radius: 4px;
   min-height: 36px;

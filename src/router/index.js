@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/layout/Main'
-import Login from '@/layout/login'
+import Login from '@/views/Login'
+import Register from '@/views/Register'
 
 Vue.use(Router)
 
@@ -13,9 +14,14 @@ export default new Router({
       component: Main,
       children:[
         {
-          path:'Login',
+          path:'login',
           name:'Login',
           component:Login
+        },
+        {
+          path:'register',
+          name:'Register',
+          component:Register
         }
       ]
     }

@@ -23,14 +23,7 @@ export default {
 };
 </script>
 <style>
-.el-main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-  line-height: 100%;
-}
 #main{
-  width:100%;
-  height:100%;
+  width: 100%
 }
 </style>
