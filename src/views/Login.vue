@@ -16,17 +16,12 @@
           </el-form-item>
 
           <el-form-item prop="pass">
-            <el-input
-              type="password"
-              v-model="Form.pass"
-              auto-complete="off"
-              placeholder="输入密码"
-            ></el-input>
+            <el-input type="password" v-model="Form.pass" auto-complete="off" placeholder="输入密码"></el-input>
           </el-form-item>
 
           <el-form-item>
             <el-button type="primary" @click="submitForm('Form')" style="width:100%;">登陆</el-button>
-            <p class="login" @click="gotoLogin">立即注册</p>
+            <p class="login" @click="gotoRegister">立即注册</p>
           </el-form-item>
         </el-form>
       </div>
@@ -68,7 +63,7 @@ export default {
       },
       rules: {
         pass: [{ validator: validatePass, trigger: "change" }],
-        tel: [{ validator: checkTel, trigger: "change" }],
+        tel: [{ validator: checkTel, trigger: "change" }]
       },
       buttonText: "发送验证码",
       isDisabled: false, // 是否禁止点击发送验证码按钮
@@ -113,9 +108,9 @@ export default {
       });
     },
     // <!--进入登录页-->
-    gotoLogin() {
+    gotoRegister() {
       this.$router.push({
-        path: "/login"
+        path: "/register"
       });
     },
     // 验证手机号

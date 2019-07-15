@@ -4,7 +4,7 @@
       <el-header>
         <el-col :span="1">
           <div>
-            <img src alt>
+            <img src alt />
           </div>
         </el-col>
 
@@ -131,7 +131,8 @@ export default {
   },
   created() {
     this.axios.get("narbars").then(res => {
-      if (res.status == 200) {
+      console.log(res.status);
+      if (res.status == 200 || res.status == 302) {
         this.narbar = res.data;
         console.log(this.narbar);
       }
