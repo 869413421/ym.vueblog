@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '@/layout/Main'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
+import PostList from '@/views/PostList'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
           path:'register',
           name:'Register',
           component:Register
+        },
+        {
+          path:'postlist',
+          name:'PostList',
+          component:PostList
         }
       ]
     }

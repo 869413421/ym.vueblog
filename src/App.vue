@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <router-view/>
+      <router-view />
     </el-container>
   </div>
 </template>
@@ -14,11 +14,16 @@ export default {
 
 <style>
 html,
-body {
+body,
+#app,
+.el-container,
+#container {
   margin: 0%;
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   color: #e9eef3;
+  height: 100%;
+  width: 100%;
 }
 
 .el-header,
@@ -32,5 +37,7 @@ body {
 .el-main {
   background-color: #e9eef3;
   text-align: center;
+  height: 80%;
+  margin-top: 0%;
 }
 </style>

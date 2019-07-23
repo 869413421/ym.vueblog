@@ -1,8 +1,8 @@
 <template>
-  <div id="main">
+  <div  id="container">
     <Header></Header>
 
-    <el-main>
+    <el-main id="main">
       Main
       <router-view/>
     </el-main>

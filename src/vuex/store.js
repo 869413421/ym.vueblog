@@ -1,27 +1,23 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
 Vue.use(Vuex)
 
 const state = {
-    count: 0
+    token: window.localStorage.getItem('token'),
+    login:true
 }
 
 const mutations = {
-    mutationsAddNum(state, n = 10) {
-        return (state.count += n);
-    },
-    mutationsReduceNum(state, n = 10) {
-        return (state.count -= n);
+    LoginStatus(state, n) {
+        state.token = n;
+        window.localStorage.setItem('token', n);
     }
 }
 
 const actions = {
-    actionAddNum({ commit }, n) {
-        commit('mutationsAddNum', n);
-    },
-    actionReduceNum({ commit }, n) {
-        commit('mutationsReduceNum', n);
+    Login(conext, n) {
+        conext.commit('LoginStatus', n);
     }
 }
 

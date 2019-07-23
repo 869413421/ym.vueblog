@@ -7,14 +7,13 @@ import store from './vuex/store'
 import Axios from 'axios'
 import Element from 'element-ui'
 import Base from './js/base'
+import Http from './js/http'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
-Axios.defaults.baseURL = 'http://ymbbs.com/api/'
-Axios.defaults.withCredentials = true;
-Vue.prototype.axios=Axios
 Vue.use(Element)
 Vue.use(Base)
+Vue.use(Http)
 
 /* eslint-disable no-new */
 new Vue({

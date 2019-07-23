@@ -115,7 +115,7 @@ export default {
     return {
       activeIndex: "1",
       activeIndex2: "1",
-      login: false,
+      login: this.$store.state.login,
       narbar: []
     };
   },
@@ -151,6 +151,9 @@ export default {
 }
 .header-right-menu li.el-menu-item {
   padding: 0;
+}
+#header{
+  height: 10%;
 }
 </style>
 

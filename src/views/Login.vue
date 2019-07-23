@@ -2,7 +2,7 @@
   <div>
     <div class="register-wrapper">
       <div id="register">
-        <p class="title">登陆</p>
+        <p class="title">登陆 {{token}}</p>
         <el-form
           :model="Form"
           status-icon
@@ -11,12 +11,17 @@
           label-width="0"
           class="ruleForm"
         >
-          <el-form-item prop="tel">
-            <el-input v-model="Form.tel" auto-complete="off" placeholder="请输入手机号"></el-input>
+          <el-form-item prop="phone">
+            <el-input v-model="Form.phone" auto-complete="off" placeholder="请输入手机号"></el-input>
           </el-form-item>
 
-          <el-form-item prop="pass">
-            <el-input type="password" v-model="Form.pass" auto-complete="off" placeholder="输入密码"></el-input>
+          <el-form-item prop="password">
+            <el-input
+              type="password"
+              v-model="Form.password"
+              auto-complete="off"
+              placeholder="输入密码"
+            ></el-input>
           </el-form-item>
 
           <el-form-item>
@@ -33,7 +38,7 @@ export default {
   name: "Register",
   data() {
     // <!--验证手机号是否合法-->
-    let checkTel = (rule, value, callback) => {
+    let checkphone = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入手机号码"));
       } else if (!this.checkMobile(value)) {
@@ -43,12 +48,12 @@ export default {
       }
     };
     // <!--验证密码-->
-    let validatePass = (rule, value, callback) => {
+    let validatepassword = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
       } else {
-        if (this.Form.checkPass !== "") {
-          this.$refs.Form.validateField("checkPass");
+        if (this.Form.checkpassword !== "") {
+          this.$refs.Form.validateField("checkpassword");
         }
         callback();
       }
@@ -56,56 +61,38 @@ export default {
 
     return {
       Form: {
-        pass: "",
-        checkPass: "",
-        tel: "",
-        smscode: ""
+        password: "",
+        phone: ""
       },
       rules: {
-        pass: [{ validator: validatePass, trigger: "change" }],
-        tel: [{ validator: checkTel, trigger: "change" }]
+        password: [{ validator: validatepassword, trigger: "change" }],
+        phone: [{ validator: checkphone, trigger: "change" }]
       },
-      buttonText: "发送验证码",
-      isDisabled: false, // 是否禁止点击发送验证码按钮
-      flag: true
+      token:this.$store.state.token,
     };
   },
   methods: {
-    // <!--发送验证码-->
-    sendCode() {
-      let tel = this.Form.tel;
-      if (this.checkMobile(tel)) {
-        console.log(tel);
-        let time = 60;
-        this.buttonText = "已发送";
-        this.isDisabled = true;
-        if (this.flag) {
-          this.flag = false;
-          let timer = setInterval(() => {
-            time--;
-            this.buttonText = time + " 秒";
-            if (time === 0) {
-              clearInterval(timer);
-              this.buttonText = "重新获取";
-              this.isDisabled = false;
-              this.flag = true;
-            }
-          }, 1000);
-        }
-      }
-    },
     // <!--提交注册-->
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          setTimeout(() => {
-            alert("注册成功");
-          }, 400);
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
+      this.axios({
+        method: "post",
+        data: this.Form,
+        url: "authorizations"
+      })
+        .then(res => {
+          this.$store.dispatch("Login", res.data.access_token);
+          if (res.status == 201) {
+            this.$message({
+              message: "登陆成功",
+              type: "success"
+            });
+          } else {
+            this.$message.error(res.message);
+          }
+        })
+        .catch(res => {
+          this.$message.error("系统繁忙");
+        });
     },
     // <!--进入登录页-->
     gotoRegister() {
