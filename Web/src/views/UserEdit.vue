@@ -1,61 +1,59 @@
 <template>
   <div>
     <div class="user-wrapper">
-      <div class="user-info">
-        <div class="el-icon-user-solid">
-          <span>修改用户信息</span>
-        </div>
-        <hr class="dirver" />
-        <el-form ref="form" :model="form" label-width="80px">
-          <el-form-item label="头像">
-            <el-upload
-              class="avatar-uploader"
-              action="http://ymbbs.com/api/image"
-              :show-file-list="false"
-              :before-upload="beforeAvatarUpload"
-              :headers="headers"
-              :data="uploadData"
-              :on-success="handleAvatarSuccess"
-              name="image"
-            >
-              <img v-if="form.avatar" :src="form.avatar" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
-          </el-form-item>
+      <el-form ref="form" :model="form">
+        <el-form-item>
+          <span class="form-header"><i class="el-icon-user">修改资料</i></span>
+        </el-form-item>
 
-          <el-form-item label="用户名称">
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
+        <el-form-item label="头像">
+          <el-upload
+            class="avatar-uploader"
+            action="http://ymbbs.com/api/image"
+            :show-file-list="false"
+            :before-upload="beforeAvatarUpload"
+            :headers="headers"
+            :data="uploadData"
+            :on-success="handleAvatarSuccess"
+            name="image"
+          >
+            <img v-if="form.avatar" :src="form.avatar" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+        </el-form-item>
 
-          <el-form-item label="真实姓名">
-            <el-input v-model="form.nickname"></el-input>
-          </el-form-item>
+        <el-form-item label="用户名称">
+          <el-input v-model="form.name"></el-input>
+        </el-form-item>
 
-          <el-form-item label="邮箱">
-            <el-input v-model="form.email"></el-input>
-          </el-form-item>
+        <el-form-item label="真实姓名">
+          <el-input v-model="form.nickname"></el-input>
+        </el-form-item>
 
-          <el-form-item label="城市">
-            <el-input v-model="form.city"></el-input>
-          </el-form-item>
+        <el-form-item label="邮箱">
+          <el-input v-model="form.email"></el-input>
+        </el-form-item>
 
-          <el-form-item label="公司">
-            <el-input v-model="form.company"></el-input>
-          </el-form-item>
+        <el-form-item label="城市">
+          <el-input v-model="form.city"></el-input>
+        </el-form-item>
 
-          <el-form-item label="头衔">
-            <el-input v-model="form.title"></el-input>
-          </el-form-item>
+        <el-form-item label="公司">
+          <el-input v-model="form.company"></el-input>
+        </el-form-item>
 
-          <el-form-item label="个人简介">
-            <el-input type="textarea" rows="10" v-model="form.introduction"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" style @click="onSubmit">更新资料</el-button>
-            <el-button @click="changRoute('/postlist')">取消</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
+        <el-form-item label="头衔">
+          <el-input v-model="form.title"></el-input>
+        </el-form-item>
+
+        <el-form-item label="个人简介">
+          <el-input type="textarea" rows="10" v-model="form.introduction"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" style @click="onSubmit">更新资料</el-button>
+          <el-button @click="changRoute('/postlist')">取消</el-button>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
@@ -139,23 +137,11 @@ export default {
   margin: 0 auto;
   padding: 20px;
   height: 100%;
-  width: 50%;
+  width: 70%;
   background-color: #fff;
 }
-.user-info {
-  margin: 0 auto;
-}
-
-.el-icon-user-solid {
-  color: black;
-  float: left;
-}
-.dirver {
-  text-transform: none;
-  color: #777;
-  font-weight: 400;
-  margin-top: 20px;
-  margin-bottom: 20px;
+.el-form {
+  width: 100%;
 }
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
@@ -179,5 +165,11 @@ export default {
   width: 178px;
   height: 178px;
   display: block;
+}
+.form-header {
+  font-size: 24px;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+  color: #606266;
 }
 </style>

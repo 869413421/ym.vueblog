@@ -120,9 +120,6 @@ export default {
     }
   },
   created() {
-    if (this.$store.state.token) {
-      this.login = true;
-    }
     this.axios.get("narbars").then(res => {
       console.log(res.status);
       if (res.status == 200 || res.status == 302) {

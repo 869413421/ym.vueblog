@@ -5,6 +5,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import PostList from '@/views/PostList'
 import UserEdit from '@/views/UserEdit'
+import PostEdit from '@/views/PostEdit'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
           path:'user_edit',
           name:'UserEdit',
           component:UserEdit
+        },
+        {
+          path:'post_edit',
+          name:'PostEdit',
+          component:PostEdit
         }
       ]
     }

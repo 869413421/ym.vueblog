@@ -1,61 +1,29 @@
 <template>
   <div>
-    <div class="user-wrapper">
-      <div class="user-info">
-        <div class="el-icon-user-solid">
-          <span>修改用户信息</span>
-        </div>
-        <hr class="dirver" />
-        <el-form ref="form" :model="form" label-width="80px">
-          <el-form-item label="头像">
-            <el-upload
-              class="avatar-uploader"
-              action="http://ymbbs.com/api/image"
-              :show-file-list="false"
-              :before-upload="beforeAvatarUpload"
-              :headers="headers"
-              :data="uploadData"
-              :on-success="handleAvatarSuccess"
-              name="image"
-            >
-              <img v-if="form.avatar" :src="form.avatar" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
-          </el-form-item>
+    <div class="post-wrapper">
+      <el-form ref="form" :model="form">
+        <el-form-item>
+          <span class="form-header">
+            <i class="el-icon-edit">博文编辑</i>
+          </span>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="form.label" placeholder="请输入标题"></el-input>
+        </el-form-item>
 
-          <el-form-item label="用户名称">
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
+        <el-form-item>
+          <template>
+            <div class="content">
+              <mavon-editor style="height:500px" :ishljs="true" @imgAdd="imgAdd"></mavon-editor>
+            </div>
+          </template>
+        </el-form-item>
 
-          <el-form-item label="真实姓名">
-            <el-input v-model="form.nickname"></el-input>
-          </el-form-item>
-
-          <el-form-item label="邮箱">
-            <el-input v-model="form.email"></el-input>
-          </el-form-item>
-
-          <el-form-item label="城市">
-            <el-input v-model="form.city"></el-input>
-          </el-form-item>
-
-          <el-form-item label="公司">
-            <el-input v-model="form.company"></el-input>
-          </el-form-item>
-
-          <el-form-item label="头衔">
-            <el-input v-model="form.title"></el-input>
-          </el-form-item>
-
-          <el-form-item label="个人简介">
-            <el-input type="textarea" rows="10" v-model="form.introduction"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" style @click="onSubmit">更新资料</el-button>
-            <el-button>取消</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
+        <el-form-item>
+          <el-button type="primary" style @click="onSubmit">更新资料</el-button>
+          <el-button>取消</el-button>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
@@ -96,21 +64,23 @@ export default {
         this.form = res.data.data;
       });
     },
-    handleAvatarSuccess(res) {
-      console.log(res.data.path);
-      this.form.avatar = res.data.path;
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/png";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 png 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      return isJPG && isLt2M;
+    imgAdd(pos, $file) {
+      // 第一步.将图片上传到服务器.
+      var formdata = new FormData();
+      formdata.append("image", $file);
+      axios({
+        url: "server url",
+        method: "post",
+        data: formdata,
+        headers: { "Content-Type": "multipart/form-data" }
+      }).then(url => {
+        // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
+        /**
+         * $vm 指为mavonEditor实例，可以通过如下两种方式获取
+         * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
+         * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
+         */
+      });
     }
   },
   created() {
@@ -127,50 +97,12 @@ export default {
 </script>
 
 <style>
-.user-wrapper {
+.post-wrapper {
   display: flex;
   margin: 0 auto;
   padding: 20px;
   height: 100%;
   width: 70%;
   background-color: #fff;
-}
-.user-info {
-  margin: 0 auto;
-}
-
-.el-icon-user-solid {
-  color: black;
-  float: left;
-}
-.dirver {
-  text-transform: none;
-  color: #777;
-  font-weight: 400;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #409eff;
-}
-.avatar-uploader-icon {
-  font-size: 15px;
-  color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-.avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
 }
 </style>

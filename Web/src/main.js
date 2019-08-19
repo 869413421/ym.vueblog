@@ -8,11 +8,14 @@ import Element from 'element-ui'
 import Base from './js/base'
 import Http from './js/http'
 import 'element-ui/lib/theme-chalk/index.css'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
 Vue.config.productionTip = false
 Vue.use(Element)
 Vue.use(Base)
 Vue.use(Http)
+Vue.use(mavonEditor)
 
 /* eslint-disable no-new */
 new Vue({
