@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Common\CacheCommon;
+use App\Http\Controllers\BaseController;
 use App\Models\NarBar;
 use App\Service\NarBarService;
 use Faker\Provider\Base;
 
-class NarBarsController extends Base
+class NarBarsController extends BaseController
 {
     public function index(Narbar $narBar, NarBarService $narBarService)
     {
@@ -19,6 +20,6 @@ class NarBarsController extends Base
             $narBarList = $narBarService->getNarbarArr($narBarArr);
             CacheCommon::setKey($key, $narBarList);
         }
-        return response()->json($narBarList)->setStatusCode(200);
+        return $this->response()->array($narBarList)->setStatusCode(200);
     }
 }

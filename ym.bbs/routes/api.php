@@ -36,15 +36,16 @@ $api->version('v1',
             $api->get('captchas', 'CaptchasController@store')->name('api.Captchas.store');
             $api->post('user', 'UserController@store')->name('api.User.store');
             $api->post('authorizations', 'AuthorizationsController@store')->name('api.authorizations.store');
-            $api->get('post', 'PostController@index')->name('api.Post.show');
+            $api->get('topic', 'TopicController@index')->name('api.Post.show');
+            $api->get('category', 'CategoryController@index')->name('api.Category.show');
             //登陆后可以访问接口
             $api->group(['middleware' => 'api.auth'], function ($api) {
                 $api->get('user', 'UserController@me')->name('api.User.show');
                 $api->patch('user', 'UserController@update')->name('api.User.update');
                 $api->post('image', 'ImageController@store')->name('api.Image.store');
 
-                $api->post('post', 'PostController@store')->name('api.Post.store');
-                $api->post('post', 'PostController@update')->name('api.Post.update');
+                $api->post('topic', 'TopicController@store')->name('api.Post.store');
+                $api->patch('topic', 'TopicController@update')->name('api.Post.update');
             });
         });
 

@@ -7,20 +7,37 @@
             <i class="el-icon-edit">博文编辑</i>
           </span>
         </el-form-item>
+
         <el-form-item>
-          <el-input v-model="form.label" placeholder="请输入标题"></el-input>
+          <el-input v-model="form.title" placeholder="请输入标题"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+          <el-select v-model="form.categorie_id" filterable placeholder="请选择分类" style="width:100%">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
         </el-form-item>
 
         <el-form-item>
           <template>
             <div class="content">
-              <mavon-editor style="height:500px" :ishljs="true" @imgAdd="imgAdd"></mavon-editor>
+              <mavon-editor
+                v-model="form.content"
+                style="height:500px"
+                :ishljs="true"
+                @imgAdd="imgAdd"
+              ></mavon-editor>
             </div>
           </template>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" style @click="onSubmit">更新资料</el-button>
+          <el-button type="primary" style @click="onSubmit">保存</el-button>
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
@@ -29,32 +46,25 @@
 </template>
 <script>
 export default {
-  name: "PostEdit",
+  name: "TopicEdit",
   data() {
     return {
       form: {
-        name: "",
-        nickname: "",
-        email: "",
-        city: "",
-        company: "",
-        title: "",
-        introduction: "",
-        avatar: ""
+        categorie_id: "",
+        content: "",
+        title: ""
       },
       headers: {
         Authorization: "Bearer " + this.$store.state.token
       },
-      uploadData: {
-        type: "avatar"
-      }
+      options: []
     };
   },
   methods: {
     onSubmit() {
       this.axios({
-        method: "patch",
-        url: "user",
+        method: "post",
+        url: "topic",
         data: this.form
       }).then(res => {
         this.$message({
@@ -68,11 +78,15 @@ export default {
       // 第一步.将图片上传到服务器.
       var formdata = new FormData();
       formdata.append("image", $file);
-      axios({
-        url: "server url",
+      formdata.append("type", 'topic');
+      this.axios({
+        url: "image",
         method: "post",
         data: formdata,
-        headers: { "Content-Type": "multipart/form-data" }
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer " + this.$store.state.token
+        }
       }).then(url => {
         // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
         /**
@@ -85,12 +99,17 @@ export default {
   },
   created() {
     this.axios
-      .get("user")
+      .get("category")
       .then(res => {
-        this.form = res.data.data;
+        for (var key in res.data) {
+          var obj = new Object();
+          obj.label = res.data[key]["title"];
+          obj.value = res.data[key]["id"];
+          this.options.push(obj);
+        }
       })
       .catch(res => {
-        this.$message.error("请重新登陆");
+        this.$message.error("系统繁忙");
       });
   }
 };

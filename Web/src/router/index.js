@@ -5,7 +5,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import PostList from '@/views/PostList'
 import UserEdit from '@/views/UserEdit'
-import PostEdit from '@/views/PostEdit'
+import TopicEdit from '@/views/TopicEdit'
 
 Vue.use(Router)
 
@@ -38,9 +38,9 @@ export default new Router({
           component:UserEdit
         },
         {
-          path:'post_edit',
-          name:'PostEdit',
-          component:PostEdit
+          path:'topic_edit',
+          name:'TopicEdit',
+          component:TopicEdit
         }
       ]
     }
