@@ -174,7 +174,9 @@ export default {
               message: "注册成功",
               type: "success"
             });
-            gotoPost();
+            console.log(res.data);
+            this.$store.dispatch("Login", res.data);
+            this.gotoPost();
           }
         })
         .catch(res => {

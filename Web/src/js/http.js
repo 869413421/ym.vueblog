@@ -8,7 +8,8 @@ import { Loading } from 'element-ui';
 // 创建 axios 实例
 
 export const Axios = axios.create({
-    baseURL: 'http://ymbbs.com/api/',  //接口名称
+    // baseURL: 'http://ymbbs.com/api/',  //接口名称
+    baseURL: 'http://127.0.0.1:9006/api/',  
     timeout: 5000,  //请求接口的时间
     withCredentials: true
 })

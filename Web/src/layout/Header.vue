@@ -67,7 +67,7 @@
         </el-col>
 
         <el-col :span="3" :offset="8">
-          <div v-if="login" class="loginpanne">
+          <div v-if="this.$store.state.token" class="loginpanne">
             <el-menu
               class="el-menu-demo header-right-menu"
               mode="horizontal"
@@ -88,12 +88,12 @@
                   <el-avatar :size="35"></el-avatar>
                 </template>
                 <el-menu-item index="2-1">个人中心</el-menu-item>
-                <el-menu-item index="user_edit">修改资料</el-menu-item>
+                <el-menu-item index="user_edit">修改资料{{user.id}}</el-menu-item>
               </el-submenu>
             </el-menu>
           </div>
 
-          <div v-if="!login">
+          <div v-if="!this.$store.state.token">
             <el-button type="info" size="small" @click="changRoute('login')">登陆</el-button>
             <el-button type="info" size="small" @click="changRoute('register')">注册</el-button>
           </div>
@@ -110,7 +110,7 @@ export default {
     return {
       activeIndex: "1",
       activeIndex2: "1",
-      login: this.$store.state.token,
+      user: this.$store.state.user,
       narbar: []
     };
   },
