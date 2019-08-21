@@ -85,15 +85,15 @@
 
               <el-submenu index="2">
                 <template slot="title">
-                  <el-avatar :size="35"></el-avatar>
+                  <el-avatar :size="35" :src="this.$store.state.user.avatar"></el-avatar>
                 </template>
                 <el-menu-item index="2-1">个人中心</el-menu-item>
-                <el-menu-item index="user_edit">修改资料{{user.id}}</el-menu-item>
+                <el-menu-item index="user_edit">修改资料</el-menu-item>
               </el-submenu>
             </el-menu>
           </div>
 
-          <div v-if="!this.$store.state.token">
+          <div v-else>
             <el-button type="info" size="small" @click="changRoute('login')">登陆</el-button>
             <el-button type="info" size="small" @click="changRoute('register')">注册</el-button>
           </div>
@@ -110,7 +110,6 @@ export default {
     return {
       activeIndex: "1",
       activeIndex2: "1",
-      user: this.$store.state.user,
       narbar: []
     };
   },

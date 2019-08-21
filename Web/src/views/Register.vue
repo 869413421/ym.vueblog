@@ -175,7 +175,8 @@ export default {
               type: "success"
             });
             console.log(res.data);
-            this.$store.dispatch("Login", res.data);
+            this.$store.commit("LoginStatus", res.data);
+            // this.$store.dispatch("Login", res.data);
             this.gotoPost();
           }
         })
@@ -185,10 +186,10 @@ export default {
     },
     // <!--进入登录页-->
     gotoLogin() {
-      this.changRoute('/login')
+      this.changRoute("/login");
     },
     gotoPost() {
-       this.changRoute('/postlist')
+      this.changRoute("/postlist");
     },
     // 验证手机号
     checkMobile(str) {

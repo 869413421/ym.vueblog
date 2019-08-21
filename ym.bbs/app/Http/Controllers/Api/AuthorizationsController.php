@@ -23,7 +23,7 @@ class AuthorizationsController extends BaseController
             return $this->response->errorUnauthorized(trans('auth.failed'));
         }
         $user = $this->user();
-        return $this->respondWithToken($user, $token)->setStatusCode(200);
+        return $this->respondWithToken($user, $token)->setStatusCode(201);
     }
 
 }

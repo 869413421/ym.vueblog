@@ -1,7 +1,6 @@
 import router from '../router';
 
 function changRoute(path) {
-    console.log(router);
     router.push({
         path: path
     });

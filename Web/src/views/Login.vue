@@ -80,7 +80,7 @@ export default {
         url: "authorizations"
       })
         .then(res => {
-          this.$store.dispatch("Login", res.data.access_token);
+          this.$store.dispatch("Login", res.data);
           if (res.status == 201) {
             this.$message({
               message: "登陆成功",

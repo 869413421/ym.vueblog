@@ -1,14 +1,7 @@
 <template>
   <div class="post_list">
     <div class="post_table">
-      <el-table
-        v-loading="loading"
-        element-loading-text="拼命加载中"
-        :data="topicList"
-        stripe
-        :border="true"
-        :highlight-current-row="true"
-      >
+      <el-table :data="topicList" stripe :border="true" :highlight-current-row="true">
         <el-table-column>
           <template slot="header">
             <div style="margin:0 auto">
@@ -67,8 +60,7 @@ export default {
       pageSize: 0,
       currentPage: 0,
       pageCount: 0,
-      type: "",
-      loading: false
+      type: ""
     };
   },
   created() {
@@ -90,7 +82,6 @@ export default {
         button.focus();
         this.type = type;
       }
-      this.loading = true;
       this.axios
         .get("topics", {
           params: {
@@ -104,10 +95,8 @@ export default {
           this.pageSize = res.data.meta.pagination.per_page;
           this.currentPage = res.data.meta.pagination.current_page;
           this.pageCount = res.data.meta.pagination.total_pages;
-          this.loading = false;
         })
         .catch(res => {
-          this.loading = false;
           this.$message.error("系统繁忙");
         });
     }
