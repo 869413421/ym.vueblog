@@ -8,6 +8,7 @@ use App\Http\Requests\Api\UserRequest;
 use App\Models\User;
 use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends BaseController
 {
@@ -18,25 +19,23 @@ class UserController extends BaseController
         $password = $request->password;
         $verification_code = $request->verification_code;
 
-        if ($name == 'superAdmin')
-        {
+        if ($name == 'superAdmin') {
             $user = new User();
             $user->name = $name;
             $user->password = Hash::make($password);
             $user->phone = $phone;
             $user->save();
-            return $this->respondWithToken($user, $user->getToken($phone,$password))->setStatusCode(201);
+            $token = JWTAuth::fromUser($user);
+            return $this->respondWithToken($token)->setStatusCode(201);
         }
 
         $key = $phone . $verification_code;
         $code = CacheCommon::getCache($key);
-        if (!$code)
-        {
+        if (!$code) {
             return $this->response->error('验证码不存在', 422);
         }
 
-        if (!$code === $verification_code)
-        {
+        if (!$code === $verification_code) {
             return $this->response->error('验证码错误', 422);
         }
 
@@ -46,7 +45,8 @@ class UserController extends BaseController
         $user->phone = $phone;
         $user->save();
 
-        return $this->respondWithToken($user, $user->getToken($phone,$password))->setStatusCode(200);
+        $token = JWTAuth::fromUser($user);
+        return $this->respondWithToken($token)->setStatusCode(201);
     }
 
     public function me()

@@ -2,9 +2,7 @@ import axios from 'axios';
 import store from '../vuex/store.js';
 import Element from 'element-ui';
 import { Loading } from 'element-ui';
-// let AUTH_TOKEN = (function() {
-// 	return sessionStorage.getItem("token");
-// })();
+
 // 创建 axios 实例
 
 export const Axios = axios.create({
@@ -40,20 +38,18 @@ Axios.interceptors.response.use(function (response) {
 Axios.defaults.transformResponse = [function (data) {
 
     Loading.service({ fullscreen: true, text: '加载中' }).close();
-    try {
-        var res = JSON.parse(data);
-        if (res.status_code == 401) {
-            Element.Message.error('请重新登陆');
-            var n = new Object;
-            n.data = null;
-            n.meta.access_token = null;
-            store.dispatch("Login", n);
-            return res;
-        }
+    // try {
+    var res = JSON.parse(data);
+    if (res.status_code == 401) {
+        console.log(store);
+        store.commit("LoginStatus", null);
+        Element.Message.error('请重新登陆');
         return res;
-    } catch (e) {
-        Element.Message.error('数据异常');
     }
+    return res;
+    // } catch (e) {
+    //     Element.Message.error(e.Message);
+    // }
 }];
 // 将 Axios 实例添加到Vue的原型对象上
 export default {

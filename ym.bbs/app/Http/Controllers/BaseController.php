@@ -10,14 +10,13 @@ class BaseController extends Controller
 {
     use Helpers;
 
-    protected function respondWithToken($user, $token)
+    protected function respondWithToken($token)
     {
-        return $this->response->item($user, new UserTransformer)->setMeta(
+        return $this->response->array(
             [
                 'access_token' => $token,
                 'token_type' => 'Bearer',
                 'expires_in' => Auth::guard('api')->factory()->getTTL() * 60
             ]);
-
     }
 }

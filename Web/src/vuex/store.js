@@ -9,23 +9,35 @@ const state = {
 }
 
 const mutations = {
-    LoginStatus(state, n) {
-        state.token = n.meta.access_token;
+    // LoginStatus(state, n) {
+    //     if (n == null) {
+    //         window.localStorage.removeItem('token');
+    //         window.localStorage.removeItem('user');
+    //         state.token = null;
+    //         state.user = null;
+    //     } else {
+    //         state.token = n.meta.access_token;
+    //         window.localStorage.removeItem('token');
+    //         window.localStorage.setItem('token', n.meta.access_token);
+
+    //         state.user = n.data;
+    //         window.localStorage.removeItem('user');
+    //         var user = JSON.stringify(n.data);
+    //         window.localStorage.setItem('user', user);
+    //     }
+
+    //     return state
+    // }
+    TokenMutation(state, n) {
+        state.token = n;
         window.localStorage.removeItem('token');
-        window.localStorage.setItem('token', n.meta.access_token);
-
-        state.user = n.data;
-        window.localStorage.removeItem('user');
-        var user = JSON.stringify(n.data);
-        window.localStorage.setItem('user', user);
-
-        return state
+        window.localStorage.setItem('token', n);
     }
 }
 
 const actions = {
-    Login(conext, n) {
-        return conext.commit('LoginStatus', n);
+    DispachToken(conext, n) {
+        return conext.commit('TokenMutation',n)
     }
 }
 

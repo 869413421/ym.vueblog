@@ -80,8 +80,9 @@ export default {
         url: "authorizations"
       })
         .then(res => {
-          this.$store.dispatch("Login", res.data);
           if (res.status == 201) {
+            this.$store.dispatch("DispachToken", res.data.access_token);
+            this.getUserInfoByToken();
             this.$message({
               message: "登陆成功",
               type: "success"
@@ -95,8 +96,9 @@ export default {
           this.$message.error("系统繁忙");
         });
     },
+
     gotoRegister() {
-      this.changRoute('/register')
+      this.changRoute("/register");
     },
 
     // 验证手机号

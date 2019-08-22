@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Transformers\UserTransformer;
+use App\Models\User;
 use Auth;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Api\AuthorizationRequest;
+use Illuminate\Support\Facades\Log;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 
 class AuthorizationsController extends BaseController
@@ -18,12 +20,12 @@ class AuthorizationsController extends BaseController
         $credentials['phone'] = $phone;
         $credentials['password'] = $password;
 
-        if (!$token = Auth::guard('api')->attempt($credentials))
-        {
+        //根据账号密码生成一个token
+        if (!$token = JWTAuth::attempt($credentials)) {
             return $this->response->errorUnauthorized(trans('auth.failed'));
         }
-        $user = $this->user();
-        return $this->respondWithToken($user, $token)->setStatusCode(201);
+
+        return $this->respondWithToken($token)->setStatusCode(201);
     }
 
 }
