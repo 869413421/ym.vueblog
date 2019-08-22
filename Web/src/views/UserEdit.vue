@@ -166,10 +166,5 @@ export default {
   height: 178px;
   display: block;
 }
-.form-header {
-  font-size: 24px;
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
-    "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
-  color: #606266;
-}
+
 </style>
