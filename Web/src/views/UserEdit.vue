@@ -3,7 +3,9 @@
     <div class="user-wrapper">
       <el-form ref="form" :model="form">
         <el-form-item>
-          <span class="form-header"><i class="el-icon-user">修改资料</i></span>
+          <span class="form-header">
+            <i class="el-icon-user">修改资料</i>
+          </span>
         </el-form-item>
 
         <el-form-item label="头像">
@@ -58,6 +60,7 @@
   </div>
 </template>
 <script>
+import { getUserIofo } from "../js/api/user";
 export default {
   name: "UserEdit",
   data() {
@@ -94,11 +97,12 @@ export default {
         url: "user",
         data: items
       }).then(res => {
+        this.form = res.data.data;
+        this.$store.dispatch("DispachUser", res.data.data);
         this.$message({
           message: "更新成功",
           type: "success"
         });
-        this.form = res.data.data;
       });
     },
     handleAvatarSuccess(res) {
@@ -119,14 +123,11 @@ export default {
     }
   },
   created() {
-    this.axios
-      .get("user")
-      .then(res => {
-        this.form = res.data.data;
-      })
-      .catch(res => {
-        this.$message.error("请重新登陆");
-      });
+    //获取用户最新信息并分发到vuex
+    getUserIofo().then(res => {
+      this.form = res.data.data;
+      this.$store.dispatch("DispachUser", res.data.data);
+    });
   }
 };
 </script>
@@ -166,5 +167,4 @@ export default {
   height: 178px;
   display: block;
 }
-
 </style>

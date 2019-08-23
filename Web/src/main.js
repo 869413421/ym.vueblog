@@ -14,8 +14,8 @@ import 'mavon-editor/dist/css/index.css'
 Vue.config.productionTip = false
 Vue.use(Element)
 Vue.use(Base)
-Vue.use(Http)
 Vue.use(mavonEditor)
+Vue.prototype.axios=Http
 
 /* eslint-disable no-new */
 new Vue({

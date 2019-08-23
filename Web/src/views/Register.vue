@@ -47,6 +47,7 @@
   </div>
 </template>
 <script>
+import { getUserIofo } from "../js/api/user";
 export default {
   name: "Register",
   data() {
@@ -170,14 +171,15 @@ export default {
       })
         .then(res => {
           if (res.status == 201) {
+            this.$store.dispatch("DispachToken", res.data.access_token);
+            getUserIofo().then(res => {
+              this.$store.dispatch("DispachUser", res.data.data);
+            });
+            this.gotoPost();
             this.$message({
               message: "注册成功",
               type: "success"
             });
-            console.log(res.data);
-            this.$store.commit("LoginStatus", res.data);
-            // this.$store.dispatch("Login", res.data);
-            this.gotoPost();
           }
         })
         .catch(res => {

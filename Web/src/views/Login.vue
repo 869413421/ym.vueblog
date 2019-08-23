@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="register-wrapper">
-      <div id="register">
+    <div class="login-wrapper">
+      <div id="login">
         <p class="title">登陆{{this.$store.state.token}}</p>
         <el-form
           :model="Form"
@@ -34,8 +34,9 @@
   </div>
 </template>
 <script>
+import { getUserIofo } from "../js/api/user";
 export default {
-  name: "Register",
+  name: "Login",
   data() {
     // <!--验证手机号是否合法-->
     let checkphone = (rule, value, callback) => {
@@ -67,12 +68,10 @@ export default {
       rules: {
         password: [{ validator: validatepassword, trigger: "change" }],
         phone: [{ validator: checkphone, trigger: "change" }]
-      },
-      token: this.$store.state.token
+      }
     };
   },
   methods: {
-    // <!--提交注册-->
     submitForm(formName) {
       this.axios({
         method: "post",
@@ -82,7 +81,11 @@ export default {
         .then(res => {
           if (res.status == 201) {
             this.$store.dispatch("DispachToken", res.data.access_token);
-            this.getUserInfoByToken();
+            //获取token成功后根据token获取用户信息
+            getUserIofo().then(res => {
+              this.$store.dispatch("DispachUser", res.data.data);
+            });
+
             this.$message({
               message: "登陆成功",
               type: "success"
@@ -126,17 +129,17 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.register-wrapper img {
+.login-wrapper img {
   position: absolute;
   z-index: 1;
 }
-.register-wrapper {
+.login-wrapper {
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
 }
-#register {
+#login {
   max-width: 340px;
   margin: 60px auto;
   background: #fff;
