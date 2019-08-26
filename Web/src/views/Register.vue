@@ -164,27 +164,36 @@ export default {
     },
     // <!--提交注册-->
     submitForm() {
-      this.axios({
-        method: "post",
-        data: this.Form,
-        url: "user"
-      })
-        .then(res => {
-          if (res.status == 201) {
-            this.$store.dispatch("DispachToken", res.data.access_token);
-            getUserIofo().then(res => {
-              this.$store.dispatch("DispachUser", res.data.data);
+      this.$refs['Form'].validate(valid => {
+        console.log(valid);
+        return ;
+        if (valid) {
+          this.axios({
+            method: "post",
+            data: this.Form,
+            url: "user"
+          })
+            .then(res => {
+              if (res.status == 201) {
+                this.$store.dispatch("DispachToken", res.data.access_token);
+                getUserIofo().then(res => {
+                  this.$store.dispatch("DispachUser", res.data.data);
+                });
+                this.gotoPost();
+                this.$message({
+                  message: "注册成功",
+                  type: "success"
+                });
+              }
+            })
+            .catch(res => {
+              this.$message.error(res.message);
             });
-            this.gotoPost();
-            this.$message({
-              message: "注册成功",
-              type: "success"
-            });
-          }
-        })
-        .catch(res => {
-          this.$message.error(res.message);
-        });
+        } else {
+          this.$message.error("请检查提交信息");
+          return false;
+        }
+      });
     },
     // <!--进入登录页-->
     gotoLogin() {
