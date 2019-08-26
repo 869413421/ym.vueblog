@@ -7,7 +7,7 @@
           :model="Form"
           status-icon
           :rules="rules"
-          ref="Form"
+          ref="ruleForm"
           label-width="0"
           class="ruleForm"
         >
@@ -25,7 +25,7 @@
           </el-form-item>
 
           <el-form-item>
-            <el-button type="primary" @click="submitForm('Form')" style="width:100%;">登陆</el-button>
+            <el-button type="primary" @click="submitForm('ruleForm')" style="width:100%;">登陆</el-button>
             <p class="login" @click="gotoRegister">立即注册</p>
           </el-form-item>
         </el-form>
@@ -48,17 +48,6 @@ export default {
         callback();
       }
     };
-    // <!--验证密码-->
-    let validatepassword = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
-      } else {
-        if (this.Form.checkpassword !== "") {
-          this.$refs.Form.validateField("checkpassword");
-        }
-        callback();
-      }
-    };
 
     return {
       Form: {
@@ -66,38 +55,52 @@ export default {
         phone: ""
       },
       rules: {
-        password: [{ validator: validatepassword, trigger: "change" }],
+        password: [
+          { required: true, message: "请输入密码", trigger: "change" },
+          {
+            min: 6,
+            max: 20,
+            message: "长度在 6 到 20 个字符",
+            trigger: "change"
+          }
+        ],
         phone: [{ validator: checkphone, trigger: "change" }]
       }
     };
   },
   methods: {
     submitForm(formName) {
-      this.axios({
-        method: "post",
-        data: this.Form,
-        url: "authorizations"
-      })
-        .then(res => {
-          if (res.status == 201) {
-            this.$store.dispatch("DispachToken", res.data.access_token);
-            //获取token成功后根据token获取用户信息
-            getUserIofo().then(res => {
-              this.$store.dispatch("DispachUser", res.data.data);
-            });
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.axios({
+            method: "post",
+            data: this.Form,
+            url: "authorizations"
+          })
+            .then(res => {
+              if (res.status == 201) {
+                this.$store.dispatch("DispachToken", res.data.access_token);
+                //获取token成功后根据token获取用户信息
+                getUserIofo().then(res => {
+                  this.$store.dispatch("DispachUser", res.data.data);
+                });
 
-            this.$message({
-              message: "登陆成功",
-              type: "success"
+                this.$message({
+                  message: "登陆成功",
+                  type: "success"
+                });
+                this.changRoute("/postlist");
+              } else {
+                this.$message.error(res.message);
+              }
+            })
+            .catch(res => {
+              this.$message.error("系统繁忙");
             });
-            this.changRoute("/postlist");
-          } else {
-            this.$message.error(res.message);
-          }
-        })
-        .catch(res => {
-          this.$message.error("系统繁忙");
-        });
+        } else {
+          this.$message.error("请检查用户名密码");
+        }
+      });
     },
 
     gotoRegister() {

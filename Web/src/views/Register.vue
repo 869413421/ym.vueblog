@@ -9,7 +9,7 @@
           :rules="rules"
           ref="ruleForm"
           label-width="0"
-          class="demo-ruleForm"
+          class="ruleForm"
         >
           <el-form-item prop="phone">
             <el-input v-model="Form.phone" auto-complete="off" placeholder="请输入手机号"></el-input>
