@@ -7,7 +7,7 @@
           :model="Form"
           status-icon
           :rules="rules"
-          ref="Form"
+          ref="ruleForm"
           label-width="0"
           class="demo-ruleForm"
         >
@@ -38,7 +38,7 @@
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('Form')" style="width:100%;">注册</el-button>
+            <el-button type="primary" @click="submitForm('ruleForm')" style="width:100%;">注册</el-button>
             <p class="login" @click="gotoLogin">已有账号？立即登录</p>
           </el-form-item>
         </el-form>
@@ -54,10 +54,11 @@ export default {
     // <!--验证手机号是否合法-->
     let checkphone = (rule, value, callback) => {
       if (value === "") {
-        callback(this.$message("请输入电话号码"));
+        callback(new Error("请输入手机号码"));
       } else if (!this.checkMobile(value)) {
         callback(new Error("手机号码不合法"));
       } else {
+        //必须调用callback否则验证无法向下执行
         callback();
       }
     };
@@ -75,7 +76,7 @@ export default {
         callback(new Error("请输入密码"));
       } else {
         if (this.Form.checkpassword !== "") {
-          this.$refs.Form.validateField("checkpassword");
+          this.$refs.ruleForm.validateField("checkpassword");
         }
         callback();
       }
@@ -94,8 +95,11 @@ export default {
     let vdlidateName = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入用户名"));
+      } else {
+        callback();
       }
     };
+
     return {
       Form: {
         name: "",
@@ -108,9 +112,13 @@ export default {
         password: [{ validator: validatepassword, trigger: "change" }],
         checkpassword: [{ validator: validatepassword2, trigger: "change" }],
         phone: [{ validator: checkphone, trigger: "change" }],
-        name: [{ validator: vdlidateName, trigger: "change" }],
+        name: [
+          { validator: vdlidateName, trigger: "change" },
+          { min: 3, max: 10, message: "长度在 3 到 10 个字符", trigger: "change" }
+        ],
         verification_code: [
-          { validator: checkverification_code, trigger: "change" }
+          { validator: checkverification_code, trigger: "change" },
+          { min: 6, max: 6, message: "请输入6位数验证码", trigger: "change" }
         ]
       },
       buttonText: "发送验证码",
@@ -163,10 +171,9 @@ export default {
       }
     },
     // <!--提交注册-->
-    submitForm() {
-      this.$refs['Form'].validate(valid => {
+    submitForm(FromName) {
+      this.$refs[FromName].validate(valid => {
         console.log(valid);
-        return ;
         if (valid) {
           this.axios({
             method: "post",
