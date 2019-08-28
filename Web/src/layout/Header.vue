@@ -80,7 +80,7 @@
                 <div class="el-icon-bell icon-class"></div>
               </el-menu-item>
               <el-menu-item>
-                <div class="el-icon-plus icon-class"></div>
+                <div class="el-icon-plus icon-class" @click="changRoute('/topic_edit')"></div>
               </el-menu-item>
 
               <el-submenu index="2">

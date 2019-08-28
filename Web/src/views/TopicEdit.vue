@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="post-wrapper">
-      <el-form ref="form" :model="form">
+      <el-form ref="form" :model="form" status-icon :rules="rules">
         <el-form-item>
           <span class="form-header">
             <i class="el-icon-edit">博文编辑</i>
           </span>
         </el-form-item>
 
-        <el-form-item>
+        <el-form-item prop="title">
           <el-input v-model="form.title" placeholder="请输入标题"></el-input>
         </el-form-item>
 
-        <el-form-item>
+        <el-form-item prop="categorie_id">
           <el-select v-model="form.categorie_id" filterable placeholder="请选择分类" style="width:100%">
             <el-option
               v-for="item in options"
@@ -23,10 +23,11 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item>
+        <el-form-item prop="content">
           <template>
             <div class="content">
               <mavon-editor
+                ref="md"
                 v-model="form.content"
                 style="height:500px"
                 :ishljs="true"
@@ -45,6 +46,7 @@
   </div>
 </template>
 <script>
+import { createTopic } from "../js/api/topic";
 export default {
   name: "TopicEdit",
   data() {
@@ -57,28 +59,43 @@ export default {
       headers: {
         Authorization: "Bearer " + this.$store.state.token
       },
-      options: []
+      options: [],
+      rules: {
+        title: [
+          { required: true, message: "请输入标题", trigger: "blur" },
+          { min: 3, max: 50, message: "标题长度在3到50间", trigger: "blur" }
+        ],
+        categorie_id: [
+          { required: true, message: "请选择分类", trigger: "blur" }
+        ],
+        content: [
+          { required: true, message: "请输入内容", trigger: "blur" },
+          { min: 20, message: "最少为20个字符", trigger: "blur" }
+        ]
+      }
     };
   },
   methods: {
     onSubmit() {
-      this.axios({
-        method: "post",
-        url: "topic",
-        data: this.form
-      }).then(res => {
-        this.$message({
-          message: "更新成功",
-          type: "success"
-        });
-        this.form = res.data.data;
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          createTopic("post", this.form).then(res => {
+            this.form = res.data.data;
+            this.$message({
+              message: "发布成功",
+              type: "success"
+            });
+          });
+        } else {
+          this.$message.error("请检查提交内容");
+        }
       });
     },
     imgAdd(pos, $file) {
       // 第一步.将图片上传到服务器.
       var formdata = new FormData();
       formdata.append("image", $file);
-      formdata.append("type", 'topic');
+      formdata.append("type", "topic");
       this.axios({
         url: "image",
         method: "post",
@@ -87,13 +104,8 @@ export default {
           "Content-Type": "multipart/form-data",
           Authorization: "Bearer " + this.$store.state.token
         }
-      }).then(url => {
-        // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
-        /**
-         * $vm 指为mavonEditor实例，可以通过如下两种方式获取
-         * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
-         * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
-         */
+      }).then(res => {
+        this.$refs.md.$img2Url(pos, res.data.data.path);
       });
     }
   },

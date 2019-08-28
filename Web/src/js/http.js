@@ -48,8 +48,9 @@ Axios.interceptors.response.use(
         }
     },
     error => {
-        console.log('err' + error) // for debug
+        console.log(error) // for debug
         let code = error.response.status;
+
         if (code === 401) {
             // to re-login
             store.dispatch("DispachToken", '');
@@ -64,6 +65,14 @@ Axios.interceptors.response.use(
                 });
             })
         }
+        if (code === 404) {
+            // to re-login
+            Message.error('系统繁忙');
+        }
+        if (code === 500) {
+            Message.error('系统繁忙');
+        }
+        Loading.service({ fullscreen: true, text: '加载中' }).close();
         return Promise.reject(error)
     }
 );
