@@ -19,10 +19,8 @@ class Cors
         $origin = $request->server('HTTP_ORIGIN') ? $request->server('HTTP_ORIGIN') : '';
         $allow_origin = [
             'http://127.0.0.1:9090',
-            'http://ymbbs.com',
         ];
-        if (in_array($origin, $allow_origin))
-        {
+        if (in_array($origin, $allow_origin)) {
             $response->header('Access-Control-Allow-Origin', $origin);
             $response->header('Access-Control-Allow-Headers', 'Origin, Content-Type, Cookie, X-CSRF-TOKEN, Accept, Authorization, X-XSRF-TOKEN,token');
             $response->header('Access-Control-Expose-Headers', 'Authorization, authenticated');
