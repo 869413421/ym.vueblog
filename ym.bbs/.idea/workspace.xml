@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e1b2355-aaec-4ea7-b890-6d102f93fb82" name="默认更改列表" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/TopicController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/TopicController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Cors.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Cors.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Topic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Topic.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ym.bbs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ym.bbs.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Listeners/TopicListen/TopicEventSubscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/TopicListen/TopicEventSubscriber.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/queue.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/queue.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,56 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Middleware/Cors.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="24" column="148" selection-start-line="24" selection-start-column="143" selection-end-line="24" selection-end-column="148" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/api.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="46" column="33" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/TopicController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="18" column="57" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/composer.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/Topic.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="19" column="33" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Listeners/TopicListen/TopicEventSubscriber.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+            <state relative-caret-position="306">
+              <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
               <folding>
                 <element signature="e#45#84#0#PHP" expanded="true" />
               </folding>
@@ -77,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Providers/EventServiceProvider.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+            <state relative-caret-position="331">
+              <caret line="24" column="22" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="28" />
               <folding>
                 <element signature="e#33#84#0#PHP" expanded="true" />
               </folding>
@@ -90,22 +47,61 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_17_144241_create_topics_table.php">
+        <entry file="file://$PROJECT_DIR$/app/Jobs/TranslateJob.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="25" column="33" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="33" />
+            <state relative-caret-position="367">
+              <caret line="39" column="59" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="59" />
+              <folding>
+                <element signature="e#28#66#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Events/TopicEvent/TopicCreated.php">
+        <entry file="file://$PROJECT_DIR$/app/Handlers/SlugTranslateHandler.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="162">
+              <caret line="9" column="29" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="29" />
               <folding>
-                <element signature="e#41#62#0#PHP" expanded="true" />
+                <element signature="e#32#54#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/queue.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="63" column="50" selection-start-line="63" selection-start-column="43" selection-end-line="63" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/database.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="151">
+              <caret line="129" column="37" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-09-10.log">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2901">
+              <caret line="3" column="41" lean-forward="true" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/app.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="439">
+              <caret line="56" column="14" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -132,6 +128,12 @@
         <option value="$PROJECT_DIR$/storage/logs/laravel-2019-08-29.log" />
         <option value="$PROJECT_DIR$/app/Events/TopicEvent/TopicCreated.php" />
         <option value="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" />
+        <option value="$PROJECT_DIR$/config/services.php" />
+        <option value="$PROJECT_DIR$/app/Handlers/SlugTranslateHandler.php" />
+        <option value="$PROJECT_DIR$/storage/logs/laravel-2019-09-09.log" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/app/Jobs/TranslateJob.php" />
+        <option value="$PROJECT_DIR$/config/queue.php" />
         <option value="$PROJECT_DIR$/app/Listeners/TopicListen/TopicEventSubscriber.php" />
       </list>
     </option>
@@ -254,13 +256,14 @@
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/overtrue/pinyin" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
-    <option name="width" value="1040" />
-    <option name="height" value="745" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -289,18 +292,7 @@
             <path>
               <item name="ym.bbs" type="b2602c69:ProjectViewProjectNode" />
               <item name="ym.bbs" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ym.bbs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ym.bbs" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ym.bbs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ym.bbs" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ym.bbs" type="b2602c69:ProjectViewProjectNode" />
@@ -327,7 +319,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="C:/_WORK/SVN_PROJ/web.php/zzz_wx_php" />
+    <property name="last_opened_file_path" value="D:/公司/zzz_wx_php" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -366,16 +358,23 @@
       <workItem from="1566783907195" duration="613000" />
       <workItem from="1566999847023" duration="3284000" />
       <workItem from="1567087723498" duration="4497000" />
+      <workItem from="1567092368963" duration="162000" />
+      <workItem from="1567355945025" duration="644000" />
+      <workItem from="1567519001522" duration="670000" />
+      <workItem from="1567868825508" duration="653000" />
+      <workItem from="1567909420364" duration="1835000" />
+      <workItem from="1568038633063" duration="6558000" />
+      <workItem from="1568124341900" duration="6124000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15156000" />
+    <option name="totallyTimeSpent" value="31802000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19989339" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19936034" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -389,7 +388,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3351893" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -469,36 +468,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="22" column="12" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="12" />
-          <folding>
-            <element signature="e#28#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Requests/Api/ImageRequest.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Helper/helper.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/Cors.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="148" selection-start-line="24" selection-start-column="143" selection-end-line="24" selection-end-column="148" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Helper/helper.php" />
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_17_143640_create_categories_table.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -509,17 +482,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-08-28.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-648" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/Cors.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/Authenticate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="35" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-54">
+          <caret line="22" column="12" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="12" />
+          <folding>
+            <element signature="e#28#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
           <caret line="46" column="33" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Helper/helpers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="29" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -530,20 +525,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="954">
+          <caret line="55" column="28" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Topic.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="19" column="33" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="33" />
+        <state relative-caret-position="342">
+          <caret line="19" column="28" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Events/TopicEvent/TopicCreated.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#41#62#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="198">
+          <caret line="11" column="37" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Handlers/ImageUploadHandler.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Contracts/Queue/ShouldQueue.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -554,30 +563,119 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-08-28.log">
+    <entry file="file://$PROJECT_DIR$/app/Helper/helpers.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-648" />
+        <state relative-caret-position="36">
+          <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Listeners/TopicListen/TopicEventSubscriber.php">
+    <entry file="file://$PROJECT_DIR$/config/app.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding>
-            <element signature="e#45#84#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="439">
+          <caret line="56" column="14" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-08-29.log">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-09-09.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Bus/PendingDispatch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="34" column="44" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/logging.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1235" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="49" column="20" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/filesystems.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-756" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/cache.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1026" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-09-10.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2901">
+          <caret line="3" column="41" lean-forward="true" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="129" column="37" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/queue.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="63" column="50" selection-start-line="63" selection-start-column="43" selection-end-line="63" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Handlers/SlugTranslateHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="29" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="29" />
+          <folding>
+            <element signature="e#32#54#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Jobs/TranslateJob.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="39" column="59" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="59" />
+          <folding>
+            <element signature="e#28#66#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Providers/EventServiceProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        <state relative-caret-position="331">
+          <caret line="24" column="22" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="28" />
           <folding>
             <element signature="e#33#84#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Listeners/TopicListen/TopicEventSubscriber.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+          <folding>
+            <element signature="e#45#84#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -3,8 +3,7 @@
 namespace App\Listeners\TopicListen;
 
 use App\Events\TopicEvent\TopicCreated;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Jobs\TranslateJob;
 
 class TopicEventSubscriber
 {
@@ -16,8 +15,12 @@ class TopicEventSubscriber
     {
         $topic = $event->topic;
         $topic->excerpt = cutString($topic->content);
-        \Log::error(cutString($topic->content . '111111'));
         $topic->save();
+        //分发任务交给baidu_translate这个队列
+        if (!$topic->slug) {
+            TranslateJob::dispatch($topic);
+            \Log::error('分发成功');
+        }
     }
 
     public function subscribe($events)

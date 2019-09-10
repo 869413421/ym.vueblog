@@ -44,4 +44,12 @@ return [
         ],
     ],
 
+    /**
+     * 百度翻译配置
+     */
+    'baidu_translate' => [
+        'app_id' => env('BAUDU_TRANSLATE_APPID'),
+        'key' => env('DAIDU_TRANSLATE_KEY')
+    ]
+
 ];

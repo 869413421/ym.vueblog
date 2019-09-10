@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'sync'),
+    'default' => env('QUEUE_CONNECTION', 'redis'),
 
     /*
     |--------------------------------------------------------------------------
@@ -63,8 +63,16 @@ return [
             'connection' => 'default',
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => 90,
-            'block_for' => null,
+            'block_for' => 5,
         ],
+
+//        'baidu_translate' => [
+//            'driver' => 'redis',
+//            'connection' => 'default',
+//            'queue' => env('REDIS_QUEUE', 'translate'),
+//            'retry_after' => 90,
+//            'block_for' => 5,
+//        ],
 
     ],
 
