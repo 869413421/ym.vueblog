@@ -13,7 +13,7 @@ class TopicController extends BaseController
 {
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['index']]);
+        $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
     public function index(Topic $topic, Request $request)
@@ -49,6 +49,11 @@ class TopicController extends BaseController
         $topic->user_id = $this->user()->id;
         $topic->save();
 
+        return $this->response->item($topic, new TopicTransformer)->setStatusCode(200);
+    }
+
+    public function show(Topic $topic)
+    {
         return $this->response->item($topic, new TopicTransformer)->setStatusCode(200);
     }
 }

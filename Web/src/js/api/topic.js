@@ -7,3 +7,10 @@ export function createTopic(type, data) {
         data: data
     })
 }
+
+export function getTopic(id) {
+    return axios({
+        url:'topic/'+id,
+        method:'get',
+    });
+}

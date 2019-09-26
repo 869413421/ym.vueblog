@@ -16,13 +16,15 @@
             <div>
               <el-avatar
                 style="float:left"
-                src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                :src="data.row.avatar"
               ></el-avatar>
+              <router-link :to="{path:'topic_show',query:{id:data.row.id}}">
               <div style="float:left;margin-left:20px">
                 <span style="float:left">{{data.row.title}}</span>
                 <br />
                 <span>{{data.row.excerpt}}</span>
               </div>
+              </router-link>
               <div style="float:right;margin-top:20px">
                 <i class="el-icon-view"></i>
                 <span style="font-size:6px;margin-left:5px">{{data.row.view_count}}</span>

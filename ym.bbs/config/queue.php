@@ -66,13 +66,13 @@ return [
             'block_for' => 5,
         ],
 
-//        'baidu_translate' => [
-//            'driver' => 'redis',
-//            'connection' => 'default',
-//            'queue' => env('REDIS_QUEUE', 'translate'),
-//            'retry_after' => 90,
-//            'block_for' => 5,
-//        ],
+        'baidu_translate' => [
+            'driver' => 'redis',
+            'connection' => 'default',
+            'queue' => env('REDIS_QUEUE', 'translate'),
+            'retry_after' => 90,
+            'block_for' => 5,
+        ],
 
     ],
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\TopicEvent\TopicCreated;
+use App\Events\TopicEvent\TopicSaving;
 
 class Topic extends BaseModel
 {
@@ -17,7 +18,8 @@ class Topic extends BaseModel
      * @var array
      */
     protected $dispatchesEvents = [
-        'created' => TopicCreated::class
+        'created' => TopicCreated::class,
+        'saving' => TopicSaving::class
     ];
 
     //模型关联
@@ -26,8 +28,13 @@ class Topic extends BaseModel
         return $this->belongsTo(User::class);
     }
 
-    //重写BASEmodel的方法
-    public function getPageData(array $where = [], $pageSize = 20, $order = 'create_at', $sort = 'DESC', $append = [])
+    public function Category()
+    {
+        return $this->belongsTo(Category::class,'categorie_id','id');
+    }
+
+    //重写BASEMODEL的方法
+    public function getPageData(array $where = [], $pageSize = 20, $order = 'created_at', $sort = 'DESC', $append = [])
     {
         return $this->newQuery()->with('user')->where($where)->orderBy($order, $sort)->paginate($pageSize)->appends($append);
     }

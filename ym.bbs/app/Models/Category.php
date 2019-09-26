@@ -8,5 +8,5 @@ class Category extends BaseModel
         'name', 'description'
     ];
 
-    public $timestamps = false;
+//    public $timestamps = false;
 }

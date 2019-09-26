@@ -47,6 +47,8 @@
 </template>
 <script>
 import { createTopic } from "../js/api/topic";
+import { getTopic } from "../js/api/topic";
+import { getUserIofo } from "../js/api/user";
 export default {
   name: "TopicEdit",
   data() {
@@ -54,7 +56,8 @@ export default {
       form: {
         categorie_id: "",
         content: "",
-        title: ""
+        title: "",
+        id: ""
       },
       headers: {
         Authorization: "Bearer " + this.$store.state.token
@@ -79,6 +82,7 @@ export default {
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          delete this.form.id;
           createTopic("post", this.form).then(res => {
             this.form = res.data.data;
             this.$message({
@@ -110,19 +114,32 @@ export default {
     }
   },
   created() {
-    this.axios
-      .get("category")
-      .then(res => {
-        for (var key in res.data) {
-          var obj = new Object();
-          obj.label = res.data[key]["title"];
-          obj.value = res.data[key]["id"];
-          this.options.push(obj);
-        }
-      })
-      .catch(res => {
-        this.$message.error("系统繁忙");
-      });
+    //获取用户最新信息并分发到vuex
+    getUserIofo().then(res => {
+      this.$store.dispatch("DispachUser", res.data.data);
+
+      this.axios
+        .get("category")
+        .then(res => {
+          for (var key in res.data) {
+            var obj = new Object();
+            obj.label = res.data[key]["title"];
+            obj.value = res.data[key]["id"];
+            this.options.push(obj);
+          }
+        })
+        .catch(res => {
+          this.$message.error("系统繁忙");
+        });
+
+      if (this.$route.query.id) {
+        this.form.id = this.$route.query.id;
+        getTopic(this.form.id).then(res => {
+          console.log(res.data.data);
+          this.form = res.data.data;
+        });
+      }
+    });
   }
 };
 </script>
