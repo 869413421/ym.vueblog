@@ -19,9 +19,14 @@ class Comment extends BaseModel
         return $this->belongsTo(Topic::class);
     }
 
+    public function Reply()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     //重写BASEMODEL的方法
     public function getPageData(array $where = [], $pageSize = 20, $order = 'created_at', $sort = 'DESC', $append = [])
     {
-        return $this->newQuery()->with(['user','topic'])->where($where)->orderBy($order, $sort)->paginate($pageSize)->appends($append);
+        return $this->newQuery()->with(['user', 'topic','reply'])->where($where)->orderBy($order, $sort)->paginate($pageSize)->appends($append);
     }
 }

@@ -54,6 +54,15 @@ class TopicController extends BaseController
 
     public function show(Topic $topic)
     {
+        $topic->updateViewCount();
         return $this->response->item($topic, new TopicTransformer)->setStatusCode(200);
+    }
+
+    public function update(TopicRequest $request, Topic $topic)
+    {
+        $this->authorize('update', $topic);
+        $topic->update($request->all());
+
+        return $this->response->item($topic, new TopicTransformer)->setStatusCode(201);
     }
 }

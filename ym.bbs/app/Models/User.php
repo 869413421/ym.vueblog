@@ -56,4 +56,9 @@ class User extends Authenticatable implements JWTSubject
         $credentials['password'] = $password;
         return JWTAuth::attempt($credentials);
     }
+
+    public function isAuthorOf($model)
+    {
+        return $this->id === $model->user_id;
+    }
 }

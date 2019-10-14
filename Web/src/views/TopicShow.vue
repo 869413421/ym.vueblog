@@ -2,21 +2,21 @@
   <div>
     <div class="post-wrapper">
       <div class="title">
-        <h1 v-html="form.title"></h1>
+        <h1 v-html="topic.title"></h1>
         <div class="header">
           <span class="el-icon-s-flag"></span>
-          {{form.categorie_name}} / {{form.diff_create_date}} /
+          <span v-if="topic.category">{{topic.category.title}} / {{topic.diff_create_date}} /</span>
           <i class="el-icon-view"></i>
-          <span>{{form.view_count}}</span> /
+          <span>{{topic.view_count}}</span> /
           <i class="el-icon-chat-dot-round"></i>
-          <span>{{form.reply_count}}</span> /
+          <span>{{topic.comment_count}}</span> /
           <i class="el-icon-star-off"></i>
-          <span>{{form.collect_count}}</span> /
-          <span>更新于{{form.diff_update_date}}</span>
+          <span>{{topic.collect_count}}</span> /
+          <span>更新于{{topic.diff_update_date}}</span>
         </div>
       </div>
       <el-divider></el-divider>
-      <div class="content" v-html="form.content"></div>
+      <div class="content" v-html="topic.content"></div>
     </div>
     <Comment></Comment>
   </div>
@@ -24,21 +24,21 @@
 <script>
 import Comment from "./Comment";
 import { getTopic } from "../js/api/topic";
+import { emoji } from "../utils/emoji";
 export default {
   name: "TopicShow",
   data() {
     return {
-      form: {},
+      topic: [],
       reply: ""
     };
   },
   created() {
     //获取用户最新信息并分发到vuex
     if (this.$route.query.id) {
-      this.form.id = this.$route.query.id;
-      getTopic(this.form.id).then(res => {
-        console.log(res.data.data);
-        this.form = res.data.data;
+      getTopic(this.$route.query.id).then(res => {
+        this.topic = res.data;
+        this.topic.content = emoji(this.topic.content);
       });
     }
   },
@@ -53,7 +53,7 @@ export default {
   margin: 0 auto;
   padding: 20px;
   height: 100%;
-  width: 70%;
+  width: 74%;
   background-color: #fff;
 }
 .title,
@@ -66,6 +66,6 @@ export default {
   margin-bottom: 10px;
   color: #adb1af;
   font-size: 14px;
-  width: 300px;
+  width: 350px;
 }
 </style>

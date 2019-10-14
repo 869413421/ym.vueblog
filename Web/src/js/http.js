@@ -72,6 +72,10 @@ Axios.interceptors.response.use(
         if (code === 500) {
             Message.error('系统繁忙');
         }
+        if (code === 422) {
+            // to re-login
+            Message.error('验证错误');
+        }
         Loading.service({ fullscreen: true, text: '加载中' }).close();
         return Promise.reject(error)
     }

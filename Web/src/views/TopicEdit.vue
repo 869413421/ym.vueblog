@@ -47,6 +47,7 @@
 </template>
 <script>
 import { createTopic } from "../js/api/topic";
+import { updateTopic } from "../js/api/topic";
 import { getTopic } from "../js/api/topic";
 import { getUserIofo } from "../js/api/user";
 export default {
@@ -80,16 +81,26 @@ export default {
   },
   methods: {
     onSubmit() {
+      var id = this.$route.query.id;
       this.$refs["form"].validate(valid => {
         if (valid) {
-          delete this.form.id;
-          createTopic("post", this.form).then(res => {
-            this.form = res.data.data;
-            this.$message({
-              message: "发布成功",
-              type: "success"
+          if (!id) {
+            createTopic("post", this.form).then(res => {
+              this.form = res.data.data;
+              this.$message({
+                message: "发布成功",
+                type: "success"
+              });
             });
-          });
+          } else {
+            updateTopic(id, this.form).then(res => {
+              this.form = res.data.data;
+              this.$message({
+                message: "更新成功",
+                type: "success"
+              });
+            });
+          }
         } else {
           this.$message.error("请检查提交内容");
         }

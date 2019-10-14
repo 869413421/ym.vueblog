@@ -10,12 +10,15 @@ import Http from './js/http'
 import 'element-ui/lib/theme-chalk/index.css'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import './assets/css/iconfont.css'
+import { emoji } from './utils/emoji'
 
 Vue.config.productionTip = false
 Vue.use(Element)
 Vue.use(Base)
 Vue.use(mavonEditor)
 Vue.prototype.axios=Http
+Vue.prototype.emoji = emoji
 
 /* eslint-disable no-new */
 new Vue({

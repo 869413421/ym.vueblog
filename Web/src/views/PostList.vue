@@ -16,7 +16,7 @@
             <div>
               <el-avatar
                 style="float:left"
-                :src="data.row.avatar"
+                :src="data.row.user.avatar"
               ></el-avatar>
               <router-link :to="{path:'topic_show',query:{id:data.row.id}}">
               <div style="float:left;margin-left:20px">
@@ -29,7 +29,7 @@
                 <i class="el-icon-view"></i>
                 <span style="font-size:6px;margin-left:5px">{{data.row.view_count}}</span>
                 <i class="el-icon-chat-dot-round"></i>
-                <span style="font-size:6px;margin-left:5px">{{data.row.reply_count}}</span>
+                <span style="font-size:6px;margin-left:5px">{{data.row.comment_count}}</span>
                 <i class="el-icon-star-off"></i>
               </div>
             </div>
@@ -88,7 +88,8 @@ export default {
         .get("topics", {
           params: {
             page: page,
-            type: type
+            type: type,
+            include:'user,category'
           }
         })
         .then(res => {

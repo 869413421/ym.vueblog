@@ -10,7 +10,15 @@ export function createTopic(type, data) {
 
 export function getTopic(id) {
     return axios({
-        url:'topic/'+id,
-        method:'get',
+        url: 'topic/' + id+'?include=user,category',
+        method: 'get',
+    });
+}
+
+export function updateTopic(id, data) {
+    return axios({
+        url: 'topic/' + id,
+        method: 'patch',
+        data:data
     });
 }

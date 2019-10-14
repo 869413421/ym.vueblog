@@ -8,5 +8,8 @@ class Category extends BaseModel
         'name', 'description'
     ];
 
-//    public $timestamps = false;
+    public function Topic()
+    {
+        return $this->hasMany(Topic::class);
+    }
 }

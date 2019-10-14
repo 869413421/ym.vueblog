@@ -19,7 +19,6 @@ class UserTransformer extends TransformerAbstract
             'title' => $user->title,
             'nickname' => $user->nickname,
             'introduction' => $user->introduction,
-
         ];
     }
 }
