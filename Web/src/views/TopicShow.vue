@@ -1,5 +1,11 @@
 <template>
   <div>
+    <!-- <el-card class="box-card" style="width:50px;float:left;">
+        <div v-for="o in 4" :key="o" class="text item">{{'列表内容 ' + o }}</div>
+    </el-card>-->
+
+    <div class="ui vertical icon menu border-0"></div>
+
     <div class="post-wrapper">
       <div class="title">
         <h1 v-html="topic.title"></h1>
@@ -67,5 +73,42 @@ export default {
   color: #adb1af;
   font-size: 14px;
   width: 350px;
+}
+.ui.vertical.menu {
+  display: block;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+}
+.ui.menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 1rem 0;
+  font-family: Lato, Helvetica Neue, Arial, Helvetica, sans-serif;
+  background: #fff;
+  font-weight: 400;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  -webkit-box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+  border-radius: 0.28571429rem;
+  min-height: 2.85714286em;
+}
+.ui.vertical.icon.menu {
+  display: inline-block;
+  width: auto;
+}
+.ui.menu:last-child {
+  margin-bottom: 0;
+}
+.ui.menu:first-child {
+  margin-top: 0;
+}
+.ui.menu {
+  font-size: 1rem;
 }
 </style>

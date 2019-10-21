@@ -8,16 +8,22 @@
       <el-avatar shape="square" size="large" :src="item.user.avatar"></el-avatar>
       <el-card class="box-card">
         <div slot="header" class="card_header">
-          <span>{{item.name}}</span>
+          <span>{{item.user.name}}</span>
           <div class="comment_header">
             <div class="el-icon-time"></div>
             {{item.diff_create_date}}
+            <a
+              href="javascript:void(0)"
+              class="el-icon-chat-dot-round"
+              @click="openReplyWrapper(item.id)"
+            >评论</a>
           </div>
         </div>
         <div v-html="item.content"></div>
-        <div style="display:inlink">
-          <el-input v-model="input" placeholder="请输入内容"></el-input>
-          <el-button type="primary">评论</el-button>
+
+        <div class="reply_wrapper" v-if="currentReply==item.id">
+          <el-input v-model="reply_content" placeholder="请输入内容"></el-input>
+          <el-button type="primary" @click="replyTopic(item.id,item.user.id)">评论</el-button>
         </div>
 
         <div v-for="reply in item.reply.data" :key="reply.id">
@@ -30,8 +36,17 @@
             <div class="comment_header">
               <div class="el-icon-time"></div>
               {{reply.diff_create_date}}
+              <a
+                href="javascript:void(0)"
+                class="el-icon-chat-dot-round"
+                @click="openReplyWrapper(reply.id)"
+              >评论</a>
             </div>
-            <div v-html="reply.content"></div>
+            <div v-html="emoji(reply.content)"></div>
+            <div class="reply_wrapper" v-if="currentReply==reply.id">
+              <el-input v-model="reply_content" placeholder="请输入内容"></el-input>
+              <el-button type="primary" @click="replyTopic(item.id,reply.user_id)">评论</el-button>
+            </div>
           </div>
         </div>
       </el-card>
@@ -42,6 +57,7 @@
 import reply from "../components/reply";
 import { getCommentList } from "../js/api/comment";
 import { emoji } from "../utils/emoji";
+import { createReply } from "../js/api/reply";
 export default {
   name: "Comment",
   data() {
@@ -62,7 +78,9 @@ export default {
         ul: true, // 无序列表
         link: true, // 链接
         help: true // 帮助
-      }
+      },
+      reply_content: "",
+      currentReply: -1
     };
   },
   created() {
@@ -74,6 +92,28 @@ export default {
       }
       console.log(this.comments);
     });
+  },
+  methods: {
+    openReplyWrapper(id) {
+      this.reply_content = "";
+      this.currentReply == id
+        ? (this.currentReply = -1)
+        : (this.currentReply = id);
+    },
+    replyTopic(comment_id, reply_user_id) {
+      var topic_id = this.$route.query.id;
+      createReply(topic_id, comment_id, reply_user_id, this.reply_content).then(
+        res => {
+          this.$message({
+            type:'success',
+            message:'评论成功'
+          });
+          setTimeout(function(){
+              window.location.reload();
+          },3000);
+        }
+      );
+    }
   },
   components: {
     reply
@@ -138,5 +178,15 @@ export default {
 }
 .avatar {
   width: 10%;
+}
+.reply_wrapper {
+  display: inline;
+}
+.reply_wrapper>.el-input {
+  width: 85%;
+  line-height: 100px;
+}
+.el-icon-chat-dot-round {
+  margin-left: 5px;
 }
 </style>

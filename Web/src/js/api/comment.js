@@ -9,10 +9,9 @@ export function getCommentList(id) {
 
 export function postComment(id, content) {
     return axios({
-        url: 'comment',
+        url: 'topic/' + id+'/comment',
         method: 'post',
         data: {
-            id: id,
             content: content
         }
     });

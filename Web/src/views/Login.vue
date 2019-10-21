@@ -82,7 +82,7 @@ export default {
                 this.$store.dispatch("DispachToken", res.data.access_token);
                 //获取token成功后根据token获取用户信息
                 getUserIofo().then(res => {
-                  this.$store.dispatch("DispachUser", res.data.data);
+                  this.$store.dispatch("DispachUser", res.data);
                 });
 
                 this.$message({
