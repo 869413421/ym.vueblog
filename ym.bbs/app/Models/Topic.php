@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Events\TopicEvent\TopicCreated;
 use App\Events\TopicEvent\TopicRetrieved;
 use App\Events\TopicEvent\TopicSaving;
+use Illuminate\Support\Facades\DB;
 
 class Topic extends BaseModel
 {
@@ -49,13 +50,11 @@ class Topic extends BaseModel
 
     public function updateCommentCount()
     {
-        $this->comment_count = $this->Comment()->count();
-        $this->save();
+        DB::table('topics')->where('id', $this->id)->update(['comment_count' => $this->Comment()->count()]);
     }
 
     public function updateViewCount()
     {
-        $this->view_count = $this->view_count + 1;
-        $this->save();
+        DB::table('topics')->where('id', $this->id)->increment('view_count');
     }
 }
