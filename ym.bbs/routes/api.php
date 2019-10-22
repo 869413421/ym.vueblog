@@ -51,7 +51,8 @@ $api->version('v1',
 
                 $api->post('topic', 'TopicController@store')->name('api.Topic.store');
                 $api->patch('topic/{topic}', 'TopicController@update')->name('api.Topic.update');
-                $api->post('comment', 'CommentController@store')->name('api.Comment.store');
+                $api->post('topic/{topic}/comment', 'CommentController@store')->name('api.Comment.store');
+                $api->post('topic/{topic}/comment/{comment}/reply', 'ReplyController@store')->name('api.reply.store');
             });
         });
 

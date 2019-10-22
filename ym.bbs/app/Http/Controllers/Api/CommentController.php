@@ -21,13 +21,8 @@ class CommentController extends BaseController
         return $this->response->paginator($comment->getPageData(['topic_id' => $topic->id]), new CommentTransformer)->setStatusCode(200);
     }
 
-    public function store(Request $request)
+    public function store(Request $request,Topic $topic)
     {
-        $topic = Topic::find($request->id);
-        if (!$topic) {
-            return $this->response->error('TOPIC NOT FOUN', 422);
-        }
-
         $comment = new Comment();
         $comment->topic_id = $topic->id;
         $comment->content = $request['content'];

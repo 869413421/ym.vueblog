@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="side-bar"></div>
     <div class="post-wrapper">
       <div class="title">
         <h1 v-html="topic.title"></h1>
@@ -53,8 +54,10 @@ export default {
   margin: 0 auto;
   padding: 20px;
   height: 100%;
-  width: 74%;
+  width: 72%;
   background-color: #fff;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
 }
 .title,
 .content {
@@ -67,5 +70,14 @@ export default {
   color: #adb1af;
   font-size: 14px;
   width: 350px;
+}
+.side-bar {
+  width: 40px;
+  background-color: #fff;
+  height: 200px;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  float: left;
+  margin-left: 150px;
 }
 </style>
