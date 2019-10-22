@@ -1,6 +1,16 @@
 <template>
   <div>
-    <div class="side-bar"></div>
+    <div class="side-bar">
+      <div class="side-icon">
+        <el-image class="icon-img" src="./static/icon/thumb_up.ico"></el-image>
+      </div>
+      <div class="side-icon">
+        <el-image class="icon-img" src="./static/icon/mark.ico"></el-image>
+      </div>
+      <div class="side-icon">
+        <el-image class="icon-img" src="./static/icon/reply.ico"></el-image>
+      </div>
+    </div>
     <div class="post-wrapper">
       <div class="title">
         <h1 v-html="topic.title"></h1>
@@ -72,12 +82,30 @@ export default {
   width: 350px;
 }
 .side-bar {
-  width: 40px;
+  width: 30px;
   background-color: #fff;
   height: 200px;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
-  float: left;
-  margin-left: 150px;
+  float: right;
+  margin-right: 180px;
+  height: 115px;
+}
+.side-icon {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom-color: #dcdfe6;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+.side-icon > .el-divider--horizontal {
+  display: block;
+  height: 1px;
+  width: 100%;
+  margin-top: 10px;
+}
+.icon-img {
+  width: 24px;
+  height: 24px;
 }
 </style>
