@@ -24,6 +24,7 @@ class TopicTransformer extends TransformerAbstract
             'slug' => $topic->slug,
             'collect_count' => $topic->collect_count,
             'comment_count' => $topic->comment_count,
+            'good_count' => $topic->good_count,
             'diff_create_date' => Carbon::createFromFormat('Y-m-d H:i:s', $topic->created_at)->diffForHumans(),
             'diff_update_date' => Carbon::createFromFormat('Y-m-d H:i:s', $topic->updated_at)->diffForHumans(),
         ];

@@ -6,7 +6,6 @@ use App\Common\CacheCommon;
 use App\Http\Controllers\BaseController;
 use App\Models\NarBar;
 use App\Service\NarBarService;
-use Faker\Provider\Base;
 
 class NarBarsController extends BaseController
 {
