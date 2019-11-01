@@ -42,6 +42,26 @@ class Topic extends BaseModel
         return $this->hasMany(Comment::class);
     }
 
+    public function Good()
+    {
+        return $this->hasMany(Good::class);
+    }
+
+    public function Collection()
+    {
+        return $this->hasMany(Collection::class);
+    }
+
+    public function updateGoodCount()
+    {
+        DB::table('topics')->where('id', $this->id)->update(['good_count' => $this->Good()->count()]);
+    }
+
+    public function updateCollectionCount()
+    {
+        DB::table('topics')->where('id', $this->id)->update(['collect_count' => $this->Collection()->count()]);
+    }
+
     //重写BASEMODEL的方法
     public function getPageData(array $where = [], $pageSize = 20, $order = 'created_at', $sort = 'DESC', $append = [])
     {

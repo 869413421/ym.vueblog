@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Collection;
 use App\Models\Good;
 use App\Models\Topic;
+use App\Policies\CollectionPolicy;
 use App\Policies\GoodPolicy;
 use App\Policies\TopicPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -19,7 +21,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Models' => 'App\Policies\ModelPolicy',
         Topic::class => TopicPolicy::class,
-        Good::class => GoodPolicy::class
+        Good::class => GoodPolicy::class,
+        Collection::class => CollectionPolicy::class
     ];
 
     /**

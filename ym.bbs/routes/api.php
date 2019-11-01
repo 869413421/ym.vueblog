@@ -25,7 +25,8 @@ $api->version('v1',
         'namespace' => 'App\Http\Controllers\Api',
         'middleware' => 'bindings'
     ],
-    function ($api) {
+    function ($api)
+    {
         $api->get('narbars', 'NarBarsController@index')->name('api.narBars.index');
         $api->get('topics', 'TopicController@index')->name('api.topic.index');
 
@@ -33,7 +34,8 @@ $api->version('v1',
             'middleware' => ['api.throttle'],
             'limit' => config('api.rate_limits.sign.limit'),
             'expires' => config('api.rate_limits.sign.expires'),
-        ], function ($api) {
+        ], function ($api)
+        {
             //游客可访问接口
             $api->get('category', 'CategoryController@index')->name('api.Category.index');
             $api->get('verificationCode', 'VerificationCodeController@store')->name('api.verfiCode.store');
@@ -44,15 +46,22 @@ $api->version('v1',
             $api->get('topic/{topic}', 'TopicController@show')->name('api.topic.show');
             $api->get('topic/{topic}/comment', 'CommentController@index')->name('api.Comment.index');
             //登陆后可以访问接口
-            $api->group(['middleware' => 'api.auth'], function ($api) {
+            $api->group(['middleware' => 'api.auth'], function ($api)
+            {
                 $api->get('user', 'UserController@me')->name('api.User.show');
                 $api->patch('user', 'UserController@update')->name('api.User.update');
+
                 $api->post('image', 'ImageController@store')->name('api.Image.store');
 
                 $api->post('topic', 'TopicController@store')->name('api.Topic.store');
                 $api->patch('topic/{topic}', 'TopicController@update')->name('api.Topic.update');
+
                 $api->get('topic/{topic}/good', 'GoodController@store')->name('api.Good.store');
                 $api->delete('topic/{topic}/good', 'GoodController@destory')->name('api.Good.delete');
+
+                $api->get('topic/{topic}/collection', 'CollectionController@store')->name('api.Collection.store');
+                $api->delete('topic/{topic}/collection', 'CollectionController@destory')->name('api.Collection.delete');
+
                 $api->post('topic/{topic}/comment', 'CommentController@store')->name('api.Comment.store');
                 $api->post('topic/{topic}/comment/{comment}/reply', 'ReplyController@store')->name('api.reply.store');
             });

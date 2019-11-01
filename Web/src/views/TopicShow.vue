@@ -30,9 +30,17 @@
             <el-image class="icon-img" src="./static/icon/thumb_up.ico" v-else></el-image>
           </div>
         </a>
-        <a href="javascript:void(0)" title="收藏">
+        <a
+          href="javascript:void(0)"
+          :title="topic.meta.give_collect?'取消收藏':'收藏'"
+          @click="changCollection()"
+        >
           <div class="side-icon">
-            <el-image class="icon-img" src="./static/icon/cancel.ico" v-if="topic.meta.collect"></el-image>
+            <el-image
+              class="icon-img"
+              src="./static/icon/cancel.ico"
+              v-if="topic.meta.give_collect"
+            ></el-image>
             <el-image class="icon-img" src="./static/icon/mark.ico" v-else></el-image>
           </div>
         </a>
@@ -50,6 +58,8 @@ import { getTopic } from "../js/api/topic";
 import { emoji } from "../utils/emoji";
 import { createGood } from "../js/api/good";
 import { deleteGood } from "../js/api/good";
+import { createCollection } from "../js/api/collection";
+import { deleteCollection } from "../js/api/collection";
 export default {
   name: "TopicShow",
   data() {
@@ -86,6 +96,27 @@ export default {
           });
           this.topic.good_count -= 1;
           this.topic.meta.give_good = !this.topic.meta.give_good;
+        });
+      }
+    },
+    changCollection(type) {
+      if (!this.topic.meta.give_collect) {
+        createCollection(this.$route.query.id).then(res => {
+          this.$message({
+            message: "收藏成功",
+            type: "success"
+          });
+          this.topic.collect_count += 1;
+          this.topic.meta.give_collect = !this.topic.meta.give_collect;
+        });
+      } else {
+        deleteCollection(this.$route.query.id).then(res => {
+          this.$message({
+            message: "取消成功",
+            type: "success"
+          });
+          this.topic.collect_count -= 1;
+          this.topic.meta.give_collect = !this.topic.meta.give_collect;
         });
       }
     }

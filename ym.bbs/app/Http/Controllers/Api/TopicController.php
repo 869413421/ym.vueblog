@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Api\TopicRequest;
+use App\Models\Collection;
 use App\Models\Good;
 use App\Models\Topic;
 use App\Transformers\TopicTransformer;
@@ -54,20 +55,24 @@ class TopicController extends BaseController
         return $this->response->item($topic, new TopicTransformer)->setStatusCode(200);
     }
 
-    public function show(Topic $topic, Good $good)
+    public function show(Topic $topic, Good $good,Collection $collection)
     {
         $topic->updateViewCount();
         $give_good = false;
-        $collect = false;
+        $give_collect = false;
         if ($this->user())
         {
             /**@var $user_good \App\Models\Good * */
             $user_good = $good->getGood($this->user()->id, $topic->id);
-            $user_good == true && !$user_good->trashed() ? $give_good = true : $give_good = false;
+            $user_good != null && !$user_good->trashed() ? $give_good = true : $give_good = false;
+
+            /**@var $user_good \App\Models\Good * */
+            $user_collection = $collection->getCollection($this->user()->id, $topic->id);
+            $user_collection != null && !$user_collection->trashed() ? $give_collect = true : $give_collect = false;
         }
         return $this->response->item($topic, new TopicTransformer)->setStatusCode(200)->setMeta([
             'give_good' => $give_good,
-            'collect' => $collect
+            'give_collect' => $give_collect
         ]);
     }
 

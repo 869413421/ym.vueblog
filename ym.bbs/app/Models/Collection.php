@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Good extends BaseModel
+class Collection extends BaseModel
 {
     use SoftDeletes;
 
@@ -20,16 +20,16 @@ class Good extends BaseModel
         return $this->belongsTo(Topic::class);
     }
 
-    public function getGood($user_id, $topic_id)
+    public function getCollection($user_id, $topic_id)
     {
         return $this->getFirstWithTrashed(['user_id' => $user_id, 'topic_id' => $topic_id]);
     }
 
-    public function createGood($user_id, $topic_id)
+    public function createCollection($user_id, $topic_id)
     {
-        $good = new self();
-        $good->user_id = $user_id;
-        $good->topic_id = $topic_id;
-        $good->save();
+        $collection = new self();
+        $collection->user_id = $user_id;
+        $collection->topic_id = $topic_id;
+        $collection->save();
     }
 }
