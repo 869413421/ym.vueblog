@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Collection;
 use App\Models\Comment;
 use App\Models\Good;
+use App\Observers\CollectionObserver;
 use App\Observers\CommentObserver;
 use App\Observers\GoodObserver;
 use Carbon\Carbon;
@@ -44,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale('zh');
         Comment::observe(CommentObserver::class);
         Good::observe(GoodObserver::class);
-        Collection::observe(CommentObserver::class);
+        Collection::observe(CollectionObserver::class);
 
         app('Dingo\Api\Transformer\Factory')->setAdapter(function ($app)
         {

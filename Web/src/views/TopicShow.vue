@@ -1,24 +1,6 @@
 <template>
-  <div>
-    <div class="topic-wrapper">
-      <div class="post-wrapper">
-        <div class="title">
-          <h1 v-html="topic.title"></h1>
-          <div class="header">
-            <span class="el-icon-s-flag"></span>
-            <span v-if="topic.category">{{topic.category.title}} / {{topic.diff_create_date}} /</span>
-            <i class="el-icon-view"></i>
-            <span>{{topic.view_count}}</span> /
-            <i class="el-icon-chat-dot-round"></i>
-            <span>{{topic.comment_count}}</span> /
-            <i class="el-icon-star-off"></i>
-            <span>{{topic.collect_count}}</span> /
-            <span>更新于{{topic.diff_update_date}}</span>
-          </div>
-        </div>
-        <el-divider></el-divider>
-        <div class="content" v-html="topic.content"></div>
-      </div>
+  <div class="topic-wrapper">
+    <div class="content_wraper">
       <div class="side-bar" v-if="topic.meta">
         <a href="javascript:void(0)" :title="topic.meta.give_good?'取消赞':'点赞'" @click="changGood()">
           <div class="side-icon">
@@ -48,8 +30,38 @@
           <el-image class="icon-img" src="./static/icon/reply.ico"></el-image>
         </div>
       </div>
+
+      <div class="post-wrapper">
+        <div class="title">
+          <h1 v-html="topic.title"></h1>
+          <div class="header">
+            <span class="el-icon-s-flag"></span>
+            <span v-if="topic.category">{{topic.category.title}} / {{topic.diff_create_date}} /</span>
+            <i class="el-icon-view"></i>
+            <span>{{topic.view_count}}</span> /
+            <i class="el-icon-chat-dot-round"></i>
+            <span>{{topic.comment_count}}</span> /
+            <i class="el-icon-star-off"></i>
+            <span>{{topic.collect_count}}</span> /
+            <span>更新于{{topic.diff_update_date}}</span>
+          </div>
+        </div>
+        <el-divider></el-divider>
+        <div class="content" v-html="topic.content"></div>
+      </div>
+      <Comment></Comment>
+      <el-card class="user_box" v-if="topic.user">
+        <el-image style="width: 200px; height: 200px" :src="topic.user.avatar"></el-image>
+        <div style="padding: 14px;">
+          <span v-html="topic.user.name"></span>
+          <div class="bottom clearfix">
+            <time class="time" v-html="topic.created_at"></time>
+            <br />
+            <el-button type="text" class="button">关注</el-button>
+          </div>
+        </div>
+      </el-card>
     </div>
-    <Comment></Comment>
   </div>
 </template>
 <script>
@@ -128,6 +140,16 @@ export default {
 </script>
 
 <style>
+.content_wraper {
+  width: 70%;
+  margin: 0 auto;
+  position: relative;
+}
+.user_box {
+  position: absolute;
+  top: 0%;
+  right: -13%;
+}
 .topic-wrapper {
   width: 100%;
   margin: 0 auto;
@@ -159,9 +181,8 @@ export default {
   background-color: #fff;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
-  display: inline-block;
   height: 115px;
-  margin-left: 20px;
+  margin-left: 5%;
   position: fixed;
 }
 .side-icon {
@@ -180,5 +201,8 @@ export default {
 .icon-img {
   width: 24px;
   height: 24px;
+}
+.user_box > .el-card__body {
+  text-align: center;
 }
 </style>
