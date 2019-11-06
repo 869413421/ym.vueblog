@@ -55,6 +55,7 @@ $api->version('v1',
 
                 $api->post('topic', 'TopicController@store')->name('api.Topic.store');
                 $api->patch('topic/{topic}', 'TopicController@update')->name('api.Topic.update');
+                $api->delete('topic/{topic}', 'TopicController@destory')->name('api.Topic.delete');
 
                 $api->get('topic/{topic}/good', 'GoodController@store')->name('api.Good.store');
                 $api->delete('topic/{topic}/good', 'GoodController@destory')->name('api.Good.delete');

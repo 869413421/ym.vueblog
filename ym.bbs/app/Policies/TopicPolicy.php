@@ -65,7 +65,7 @@ class TopicPolicy
      */
     public function delete(User $user, Topic $topic)
     {
-        //
+        return $user->isAuthorOf($topic);
     }
 
     /**

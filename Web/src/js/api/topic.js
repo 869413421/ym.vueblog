@@ -22,3 +22,11 @@ export function updateTopic(id, data) {
         data:data
     });
 }
+
+export function deleteTopic(id)
+{
+    return axios({
+        url: 'topic/' + id,
+        method: 'delete'
+    })
+}

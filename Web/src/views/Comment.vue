@@ -105,12 +105,12 @@ export default {
       createReply(topic_id, comment_id, reply_user_id, this.reply_content).then(
         res => {
           this.$message({
-            type:'success',
-            message:'评论成功'
+            type: "success",
+            message: "评论成功"
           });
-          setTimeout(function(){
-              window.location.reload();
-          },3000);
+          setTimeout(function() {
+            window.location.reload();
+          }, 3000);
         }
       );
     }
@@ -123,7 +123,9 @@ export default {
 
 <style>
 .comment-wrapper {
-  margin-top: 20px;
+  position: absolute;
+  width: 100%;
+  top: 125%;
 }
 .box-card {
   width: 92%;
@@ -154,10 +156,13 @@ export default {
 }
 
 .comment_edit {
-  margin: 0 auto;
   padding: 20px 0 20px 0px;
   width: 74%;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  position: absolute;
+  left: 13%;
+  top: 122%;
 }
 
 .comment > .el-avatar {
@@ -182,7 +187,7 @@ export default {
 .reply_wrapper {
   display: inline;
 }
-.reply_wrapper>.el-input {
+.reply_wrapper > .el-input {
   width: 85%;
   line-height: 100px;
 }

@@ -23,8 +23,7 @@ class TopicController extends BaseController
         $type = $request->type;
         $order = 'created_at';
         $sort = 'DESC';
-        switch ($type)
-        {
+        switch ($type) {
             case'Active':
                 $order = 'view_count';
                 break;
@@ -55,13 +54,12 @@ class TopicController extends BaseController
         return $this->response->item($topic, new TopicTransformer)->setStatusCode(200);
     }
 
-    public function show(Topic $topic, Good $good,Collection $collection)
+    public function show(Topic $topic, Good $good, Collection $collection)
     {
         $topic->updateViewCount();
         $give_good = false;
         $give_collect = false;
-        if ($this->user())
-        {
+        if ($this->user()) {
             /**@var $user_good \App\Models\Good * */
             $user_good = $good->getGood($this->user()->id, $topic->id);
             $user_good != null && !$user_good->trashed() ? $give_good = true : $give_good = false;
@@ -82,5 +80,13 @@ class TopicController extends BaseController
         $topic->update($request->all());
 
         return $this->response->item($topic, new TopicTransformer)->setStatusCode(201);
+    }
+
+    public function destory(Topic $topic)
+    {
+        $this->authorize('delete', $topic);
+        $topic->delete();
+
+        return $this->response->created();
     }
 }

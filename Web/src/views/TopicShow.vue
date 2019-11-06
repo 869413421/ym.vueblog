@@ -49,6 +49,15 @@
         <el-divider></el-divider>
         <div class="content" v-html="topic.content"></div>
       </div>
+
+      <div
+        class="user_button"
+        v-if="this.$store.state.user&&topic.user&&topic.user.id===this.$store.state.user.id"
+      >
+        <el-button type="primary" icon="el-icon-edit" size="small" circle  @click="changRoute('topic_edit?id='+topic.id)"></el-button>
+        <el-button type="danger" icon="el-icon-delete" size="small" circle @click="destoryTopic"></el-button>
+      </div>
+
       <Comment></Comment>
       <el-card class="user_box" v-if="topic.user">
         <el-image style="width: 200px; height: 200px" :src="topic.user.avatar"></el-image>
@@ -67,6 +76,7 @@
 <script>
 import Comment from "./Comment";
 import { getTopic } from "../js/api/topic";
+import { deleteTopic } from "../js/api/topic";
 import { emoji } from "../utils/emoji";
 import { createGood } from "../js/api/good";
 import { deleteGood } from "../js/api/good";
@@ -131,6 +141,36 @@ export default {
           this.topic.meta.give_collect = !this.topic.meta.give_collect;
         });
       }
+    },
+    destoryTopic() {
+      this.$confirm("此操作将永久删除该文章, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          var id = this.$route.query.id;
+          deleteTopic(id)
+            .then(res => {
+              this.$message({
+                type: "success",
+                message: "删除成功!"
+              });
+              this.changRoute("/");
+            })
+            .catch(() => {
+              this.$message({
+                type: "error",
+                message: "系统繁忙!"
+              });
+            });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     }
   },
   components: {
@@ -163,6 +203,11 @@ export default {
   border: 1px solid #dcdfe6;
   border-radius: 4px;
   display: inline-block;
+}
+.user_button {
+  position: absolute;
+  padding: 20px;
+  right: 12%;
 }
 .title,
 .content {

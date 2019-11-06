@@ -12,8 +12,8 @@
           <el-input v-model="form.title" placeholder="请输入标题"></el-input>
         </el-form-item>
 
-        <el-form-item prop="categorie_id">
-          <el-select v-model="form.categorie_id" filterable placeholder="请选择分类" style="width:100%">
+        <el-form-item prop="categorie_id" v-if="form.category">
+          <el-select v-model="form.category.id" filterable placeholder="请选择分类" style="width:100%">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -82,6 +82,8 @@ export default {
   methods: {
     onSubmit() {
       var id = this.$route.query.id;
+      this.form.categorie_id=this.form.category.id
+      console.log(this.form);
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (!id) {
@@ -126,31 +128,31 @@ export default {
   },
   created() {
     //获取用户最新信息并分发到vuex
-    getUserIofo().then(res => {
-      this.$store.dispatch("DispachUser", res.data.data);
+    // getUserIofo().then(res => {
+    //   this.$store.dispatch("DispachUser", res.data.data);
 
-      this.axios
-        .get("category")
-        .then(res => {
-          for (var key in res.data) {
-            var obj = new Object();
-            obj.label = res.data[key]["title"];
-            obj.value = res.data[key]["id"];
-            this.options.push(obj);
-          }
-        })
-        .catch(res => {
-          this.$message.error("系统繁忙");
-        });
+    this.axios
+      .get("category")
+      .then(res => {
+        for (var key in res.data) {
+          var obj = new Object();
+          obj.label = res.data[key]["title"];
+          obj.value = res.data[key]["id"];
+          this.options.push(obj);
+        }
+      })
+      .catch(res => {
+        this.$message.error("系统繁忙");
+      });
 
-      if (this.$route.query.id) {
-        this.form.id = this.$route.query.id;
-        getTopic(this.form.id).then(res => {
-          console.log(res.data.data);
-          this.form = res.data.data;
-        });
-      }
-    });
+    if (this.$route.query.id) {
+      this.form.id = this.$route.query.id;
+      getTopic(this.form.id).then(res => {
+        this.form = res.data;
+        console.log(this.form);
+      });
+    }
+    // });
   }
 };
 </script>
