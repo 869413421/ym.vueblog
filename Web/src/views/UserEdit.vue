@@ -125,8 +125,8 @@ export default {
   created() {
     //获取用户最新信息并分发到vuex
     getUserIofo().then(res => {
-      this.form = res.data.data;
-      this.$store.dispatch("DispachUser", res.data.data);
+      this.form = res.data;
+      this.$store.dispatch("DispachUser", res.data);
     });
   }
 };

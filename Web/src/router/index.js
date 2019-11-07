@@ -7,6 +7,7 @@ import PostList from '@/views/PostList'
 import UserEdit from '@/views/UserEdit'
 import TopicEdit from '@/views/TopicEdit'
 import TopicShow from '@/views/TopicShow'
+import UserCenter from '@/views/UserCenter'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
           path: 'topic_show',
           name: 'TopicShow',
           component: TopicShow
+        },
+        {
+          path: 'user_center',
+          name: 'UserCenter',
+          component: UserCenter
         }
       ]
     }

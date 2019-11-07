@@ -87,7 +87,7 @@
                 <template slot="title">
                   <el-avatar :size="35" :src="this.$store.state.user.avatar"></el-avatar>
                 </template>
-                <el-menu-item index="2-1">个人中心</el-menu-item>
+                <el-menu-item index="user_center">个人中心</el-menu-item>
                 <el-menu-item index="user_edit">修改资料</el-menu-item>
               </el-submenu>
             </el-menu>
