@@ -20,6 +20,7 @@ class TopicTransformer extends TransformerAbstract
             'content' => $topic->content,
             'reply_count' => $topic->reply_count,
             'view_count' => $topic->view_count,
+            'categorie_id' => $topic->categorie_id,
             'excerpt' => $topic->excerpt,
             'slug' => $topic->slug,
             'collect_count' => $topic->collect_count,

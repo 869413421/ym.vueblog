@@ -13,7 +13,7 @@
         </el-form-item>
 
         <el-form-item prop="categorie_id" v-if="form.category">
-          <el-select v-model="form.category.id" filterable placeholder="请选择分类" style="width:100%">
+          <el-select v-model="form.categorie_id" filterable placeholder="请选择分类" style="width:100%">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -88,7 +88,7 @@ export default {
         if (valid) {
           if (!id) {
             createTopic("post", this.form).then(res => {
-              this.form = res.data.data;
+              this.form = res.data;
               this.$message({
                 message: "发布成功",
                 type: "success"
@@ -96,7 +96,7 @@ export default {
             });
           } else {
             updateTopic(id, this.form).then(res => {
-              this.form = res.data.data;
+              this.form = res.data;
               this.$message({
                 message: "更新成功",
                 type: "success"

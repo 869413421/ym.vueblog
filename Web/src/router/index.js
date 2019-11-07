@@ -8,6 +8,7 @@ import UserEdit from '@/views/UserEdit'
 import TopicEdit from '@/views/TopicEdit'
 import TopicShow from '@/views/TopicShow'
 import UserCenter from '@/views/UserCenter'
+import UserInfoBox from '@/components/UserInfoBox'
 
 Vue.use(Router)
 
@@ -52,7 +53,15 @@ export default new Router({
         {
           path: 'user_center',
           name: 'UserCenter',
-          component: UserCenter
+          component: UserCenter,
+          children: [
+            {
+              path: '/user_center/user_info',
+              name: 'UserInfoBox',
+              component: UserInfoBox
+            }
+          ]
+
         }
       ]
     }

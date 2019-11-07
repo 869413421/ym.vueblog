@@ -5,8 +5,29 @@
         <div slot="header" class="clearfix">
           <span>我的创作</span>
         </div>
-        <div class="boxcard-body">基本资料</div>
+        <div class="boxcard-body">
+          <router-link :to="{name: 'UserInfoBox'}">基础信息</router-link>
+        </div>
         <div class="boxcard-body">我的文章</div>
+        <div class="boxcard-body">我的动态</div>
+        <div class="boxcard-body">我的收藏</div>
+        <div class="boxcard-body">我的点赞</div>
+      </el-card>
+    </div>
+
+    <router-view></router-view>
+
+    <div class="user-info">
+      <el-card class="user_box" v-if="user">
+        <el-image style="width: 200px; height: 200px" :src="user.avatar"></el-image>
+        <div style="padding: 14px;">
+          <span v-html="user.name"></span>
+          <div class="bottom clearfix">
+            <!-- <time class="time" v-html="topic.created_at"></time> -->
+            <br />
+            <el-button type="text" class="button">关注</el-button>
+          </div>
+        </div>
       </el-card>
     </div>
   </div>
@@ -15,7 +36,12 @@
 export default {
   name: "UserCenter",
   data() {
-    return {};
+    return {
+      user: null
+    };
+  },
+  created() {
+    this.user = this.$store.state.user;
   }
 };
 </script>
@@ -30,7 +56,7 @@ export default {
   background-color: #fff;
   border: 1px solid #dcdfe6;
   border-radius: 11px;
-  width: 15%;
+  width: 10%;
   position: absolute;
   left: 7%;
 }
@@ -42,8 +68,17 @@ export default {
 }
 
 .boxcard-body {
-  border-bottom: 1px solid #EBEEF5;
+  border-bottom: 1px solid #ebeef5;
   padding: 10px;
   padding: 10px 0px 10px;
+  color: #7b7979;
+  font-weight: 100;
+  font-size: 14px;
+}
+.user-info {
+  position: relative;
+  position: relative;
+  width: 15%;
+  right: -76%;
 }
 </style>
