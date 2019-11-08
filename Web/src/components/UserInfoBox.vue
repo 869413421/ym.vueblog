@@ -1,5 +1,12 @@
 <template>
-  <div class="user-info-box"></div>
+  <div class="user-info-box">
+    <div class="user-info-box-header">
+      <span class>注册于：{{user.regirster_date}} ，最后活跃于：{{user.regirster_date}}</span>
+    </div>
+    <div class="user-info-box-body">
+      <span class>注册于：{{user.regirster_date}} ，最后活跃于：{{user.regirster_date}}</span>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -18,13 +25,18 @@ export default {
 
 <style>
 .user-info-box {
-  text-align: left;
+  width: 100%;
+  position: absolute;
+}
+.user-info-box-header {
   background-color: #fff;
-  border: 1px solid #dcdfe6;
-  border-radius: 11px;
+  border-radius: 5px;
   width: 50%;
   position: absolute;
-  height: 200px;
   right: 28%;
+  color: #7b7979;
+  font-weight: 100;
+  font-size: 17px;
+  padding: 12px;
 }
 </style>

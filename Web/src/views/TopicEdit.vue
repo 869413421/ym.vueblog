@@ -12,7 +12,7 @@
           <el-input v-model="form.title" placeholder="请输入标题"></el-input>
         </el-form-item>
 
-        <el-form-item prop="categorie_id" v-if="form.category">
+        <el-form-item prop="categorie_id">
           <el-select v-model="form.categorie_id" filterable placeholder="请选择分类" style="width:100%">
             <el-option
               v-for="item in options"
@@ -82,7 +82,6 @@ export default {
   methods: {
     onSubmit() {
       var id = this.$route.query.id;
-      this.form.categorie_id=this.form.category.id
       console.log(this.form);
       this.$refs["form"].validate(valid => {
         if (valid) {
@@ -93,6 +92,9 @@ export default {
                 message: "发布成功",
                 type: "success"
               });
+              setTimeout(() => {
+                this.changRoute("topic_show?id" + this.form.id);
+              }, 1000);
             });
           } else {
             updateTopic(id, this.form).then(res => {
@@ -101,6 +103,9 @@ export default {
                 message: "更新成功",
                 type: "success"
               });
+              setTimeout(() => {
+                this.changRoute("topic_show?id" + this.form.id);
+              }, 1000);
             });
           }
         } else {

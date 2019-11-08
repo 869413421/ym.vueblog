@@ -19,13 +19,31 @@
 
     <div class="user-info">
       <el-card class="user_box" v-if="user">
-        <el-image style="width: 200px; height: 200px" :src="user.avatar"></el-image>
+        <el-image style="width: 100%; height: 100%;" :src="user.avatar"></el-image>
         <div style="padding: 14px;">
-          <span v-html="user.name"></span>
           <div class="bottom clearfix">
-            <!-- <time class="time" v-html="topic.created_at"></time> -->
+            <!-- <time class="time" v-html="user.created_at"></time>
             <br />
-            <el-button type="text" class="button">关注</el-button>
+            <el-button type="text" class="button">关注</el-button>-->
+            <div class="user-index-wraper">
+              <div class="user-index-item">
+                文章
+                <br />
+                {{user.topic_count}}
+              </div>
+              <div class="user-index-item">
+                粉丝
+                <br />
+                {{user.fans_count}}
+              </div>
+              <div class="user-index-item">
+                喜欢
+                <br />
+                {{user.good_count}}
+              </div>
+            </div>
+            <span id="user_name" v-html="user.name"></span>
+            <br><span v-html="user.regirster_date"></span>
           </div>
         </div>
       </el-card>
@@ -80,5 +98,23 @@ export default {
   position: relative;
   width: 15%;
   right: -76%;
+}
+#user_name {
+  font-size: 1rem !important;
+  font-weight: 700;
+  color: #a5a5a5 !important;
+}
+.user-index-wraper {
+  margin: 20px 0px 20px 0px;
+  padding: 10px;
+  border-bottom: 1px solid #ebeef5;
+  border-top: 1px solid #ebeef5;
+  color: #7b7979;
+  font-size: 14px;
+  font-weight: 400;
+}
+.user-index-item {
+  display: inline-block;
+  padding: 3.8px;
 }
 </style>

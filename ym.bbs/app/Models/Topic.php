@@ -25,7 +25,9 @@ class Topic extends BaseModel
 //        'retrieved' => TopicRetrieved::class,
     ];
 
-    //模型关联
+    /**
+     * @return User
+     */
     public function User()
     {
         return $this->belongsTo(User::class);

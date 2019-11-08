@@ -20,8 +20,15 @@ class TopicEventSubscriber
         $topic = $event->topic;
         $topic->excerpt = cutString($topic->content, 50) . '...';
         $topic->save();
+
+        //统计用户文章总数
+        /**@var $user \App\Models\User * */
+        $user = $topic->user;
+        $user->updateTopicCount();
+
         //分发任务交给baidu_translate这个队列
-        if (!$topic->slug) {
+        if (!$topic->slug)
+        {
             TranslateJob::dispatch($topic)->onConnection('baidu_translate')->onQueue('translate');
         }
     }

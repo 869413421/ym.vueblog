@@ -11,6 +11,7 @@ class GoodObserver
         /**@var $topic \App\Models\Topic * */
         $topic = $good->topic;
         $topic->updateGoodCount();
+        $topic->user->updateGoodCount();
     }
 
     public function updated(Good $good)
@@ -18,6 +19,7 @@ class GoodObserver
         /**@var $topic \App\Models\Topic * */
         $topic = $good->topic;
         $topic->updateGoodCount();
+        $topic->user->updateGoodCount();
     }
 
     public function deleted(Good $good)
@@ -25,5 +27,6 @@ class GoodObserver
         /**@var $topic \App\Models\Topic * */
         $topic = $good->topic;
         $topic->updateGoodCount();
+        $topic->user->updateGoodCount();
     }
 }

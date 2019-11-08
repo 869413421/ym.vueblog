@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Models\Collection;
 use App\Models\Comment;
 use App\Models\Good;
+use App\Models\User;
 use App\Observers\CollectionObserver;
 use App\Observers\CommentObserver;
 use App\Observers\GoodObserver;
+use App\Observers\UserObserver;
 use Carbon\Carbon;
 use Dingo\Api\Facade\API;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -46,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
         Comment::observe(CommentObserver::class);
         Good::observe(GoodObserver::class);
         Collection::observe(CollectionObserver::class);
+        User::observe(UserObserver::class);
 
         app('Dingo\Api\Transformer\Factory')->setAdapter(function ($app)
         {

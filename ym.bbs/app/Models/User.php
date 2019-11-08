@@ -50,6 +50,13 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    /**
+     * 生成token
+     *
+     * @param $phone
+     * @param $password
+     * @return false|string
+     */
     public function getToken($phone, $password)
     {
         $credentials['phone'] = $phone;
@@ -57,6 +64,46 @@ class User extends Authenticatable implements JWTSubject
         return JWTAuth::attempt($credentials);
     }
 
+    /**
+     * @return Topic
+     */
+    public function Topic()
+    {
+        return $this->hasMany(Topic::class);
+    }
+
+    /**
+     * 统计用户文章总数
+     */
+    public function updateTopicCount()
+    {
+        $this->topic_count = $this->Topic()->count();
+        $this->save();
+    }
+
+    /**
+     * 统计用户所有点赞数
+     */
+    public function updateGoodCount()
+    {
+        $this->good_count = $this->Topic()->sum('good_count');
+        $this->save();
+    }
+
+    /**
+     * 更新用户最后活跃时间
+     */
+    public function updateLastActiveDate()
+    {
+        $this->last_active_time = now();
+        $this->save();
+    }
+
+    /**
+     * 返回用户是否用户当前模型的操作权限
+     * @param $model
+     * @return bool
+     */
     public function isAuthorOf($model)
     {
         return $this->id === $model->user_id;
