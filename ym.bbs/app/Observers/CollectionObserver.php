@@ -2,7 +2,9 @@
 
 namespace App\Observers;
 
+use App\Models\Action;
 use App\Models\Collection;
+use App\Models\Topic;
 
 class CollectionObserver
 {
@@ -11,6 +13,9 @@ class CollectionObserver
         /**@var $topic \App\Models\Topic * */
         $topic = $collection->topic;
         $topic->updateCollectionCount();
+
+        $action = new Action();
+        $action->createAction($topic->user_id, Collection::class,'create');
     }
 
     public function updated(Collection $collection)

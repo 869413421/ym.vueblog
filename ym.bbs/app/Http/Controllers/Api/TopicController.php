@@ -23,7 +23,8 @@ class TopicController extends BaseController
         $type = $request->type;
         $order = 'created_at';
         $sort = 'DESC';
-        switch ($type) {
+        switch ($type)
+        {
             case'Active':
                 $order = 'view_count';
                 break;
@@ -41,6 +42,7 @@ class TopicController extends BaseController
                 $sort = 'ASC';
                 break;
         }
+        \Log::error(Topic::class);
         return $this->response->paginator($topic->getPageData([], 10, $order, $sort, $request->all()), new TopicTransformer)->setStatusCode(200);
     }
 
@@ -59,7 +61,8 @@ class TopicController extends BaseController
         $topic->updateViewCount();
         $give_good = false;
         $give_collect = false;
-        if ($this->user()) {
+        if ($this->user())
+        {
             /**@var $user_good \App\Models\Good * */
             $user_good = $good->getGood($this->user()->id, $topic->id);
             $user_good != null && !$user_good->trashed() ? $give_good = true : $give_good = false;

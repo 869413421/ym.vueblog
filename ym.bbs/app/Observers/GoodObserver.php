@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Action;
 use App\Models\Good;
 
 class GoodObserver
@@ -12,6 +13,9 @@ class GoodObserver
         $topic = $good->topic;
         $topic->updateGoodCount();
         $topic->user->updateGoodCount();
+
+        $action = new Action();
+        $action->createAction($good->user_id, Good::class,'create');
     }
 
     public function updated(Good $good)

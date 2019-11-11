@@ -6,6 +6,7 @@ use App\Events\TopicEvent\TopicCreated;
 use App\Events\TopicEvent\TopicRetrieved;
 use App\Events\TopicEvent\TopicSaving;
 use App\Jobs\TranslateJob;
+use App\Models\Action;
 use App\Models\Topic;
 use Illuminate\Support\Facades\DB;
 
@@ -25,6 +26,9 @@ class TopicEventSubscriber
         /**@var $user \App\Models\User * */
         $user = $topic->user;
         $user->updateTopicCount();
+
+        $action = new Action();
+        $action->createAction($topic->user_id, Topic::class,'create');
 
         //分发任务交给baidu_translate这个队列
         if (!$topic->slug)

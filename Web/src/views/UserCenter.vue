@@ -22,9 +22,6 @@
         <el-image style="width: 100%; height: 100%;" :src="user.avatar"></el-image>
         <div style="padding: 14px;">
           <div class="bottom clearfix">
-            <!-- <time class="time" v-html="user.created_at"></time>
-            <br />
-            <el-button type="text" class="button">关注</el-button>-->
             <div class="user-index-wraper">
               <div class="user-index-item">
                 文章
@@ -43,7 +40,10 @@
               </div>
             </div>
             <span id="user_name" v-html="user.name"></span>
-            <br><span v-html="user.regirster_date"></span>
+            <br />
+            <span :title="user.last_active_time" v-html="user.diff_last_active_time"></span>
+            <br />
+            <el-button size="small" style="width:100%;margin-top:7%" @click="changRoute('/user_edit')">编辑资料</el-button>
           </div>
         </div>
       </el-card>
