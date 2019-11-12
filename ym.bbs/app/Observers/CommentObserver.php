@@ -11,6 +11,6 @@ class CommentObserver
     {
         $comment->Topic->updateCommentCount();
         $action = new Action();
-        $action->createAction($comment->user_id, Comment::class,'create');
+        $action->createAction($comment->user_id, Comment::class,'create',$comment->id);
     }
 }

@@ -15,7 +15,7 @@ class GoodObserver
         $topic->user->updateGoodCount();
 
         $action = new Action();
-        $action->createAction($good->user_id, Good::class,'create');
+        $action->createAction($good->user_id, Good::class,'create',$good->id);
     }
 
     public function updated(Good $good)

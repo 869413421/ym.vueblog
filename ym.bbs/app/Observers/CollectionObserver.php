@@ -15,7 +15,7 @@ class CollectionObserver
         $topic->updateCollectionCount();
 
         $action = new Action();
-        $action->createAction($topic->user_id, Collection::class,'create');
+        $action->createAction($topic->user_id, Collection::class,'create',$collection->id);
     }
 
     public function updated(Collection $collection)

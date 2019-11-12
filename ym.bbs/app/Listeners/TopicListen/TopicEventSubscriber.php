@@ -28,7 +28,7 @@ class TopicEventSubscriber
         $user->updateTopicCount();
 
         $action = new Action();
-        $action->createAction($topic->user_id, Topic::class,'create');
+        $action->createAction($topic->user_id, Topic::class,'create',$topic->id);
 
         //分发任务交给baidu_translate这个队列
         if (!$topic->slug)

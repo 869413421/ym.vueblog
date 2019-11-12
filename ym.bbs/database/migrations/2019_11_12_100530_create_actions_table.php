@@ -18,6 +18,7 @@ class CreateActionsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id')->nullable(false)->index();
             $table->string('model')->nullable(false);
+            $table->integer('model_id')->nullable(false);
             $table->string('action')->nullable(false);
             $table->timestamps();
         });

@@ -42,7 +42,6 @@ class TopicController extends BaseController
                 $sort = 'ASC';
                 break;
         }
-        \Log::error(Topic::class);
         return $this->response->paginator($topic->getPageData([], 10, $order, $sort, $request->all()), new TopicTransformer)->setStatusCode(200);
     }
 

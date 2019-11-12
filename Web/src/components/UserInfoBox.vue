@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { getAction } from "../js/api/action";
 export default {
   name: "UserInfoBox",
   data() {
@@ -44,6 +45,9 @@ export default {
   },
   created() {
     this.user = this.$store.state.user;
+    getAction().then(res => {
+      console.log(res.data);
+    });
   }
 };
 </script>

@@ -50,6 +50,7 @@ $api->version('v1',
             {
                 $api->get('user', 'UserController@me')->name('api.User.show');
                 $api->patch('user', 'UserController@update')->name('api.User.update');
+                $api->get('user/action', 'ActionController@index')->name('api.User.action');
 
                 $api->post('image', 'ImageController@store')->name('api.Image.store');
 

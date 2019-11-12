@@ -72,6 +72,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Topic::class);
     }
 
+    public function Action()
+    {
+        return $this->hasMany(Action::class);
+    }
+
     /**
      * 统计用户文章总数
      */
