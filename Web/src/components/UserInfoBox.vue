@@ -31,6 +31,34 @@
         </dt>
       </dl>
     </div>
+
+    <div class="user-info-box-content">
+      <dl>
+        <dt class="dt-header">
+          <div class="el-icon-chat-line-square"></div>动态
+        </dt>
+        <dt v-for="item in action_list" :key="item.id">
+          <div class="action-content" v-if="item.model">
+            <el-image style="width: 100px; height: 100px;" :src="user.avatar"></el-image>
+            <span>{{user.name}}</span>
+            <span v-if="item.model.type==='good'">点赞了文章</span>
+            <span v-if="item.model.type==='collect'">收藏了文章</span>
+            <span v-if="item.model.type==='topic'">发布了文章</span>
+            <span>{{item.diff_create_date}}</span>
+
+            <div class="action-post">
+              <el-image :src="item.model.avatar"></el-image>
+              <div class="action-post-header">
+                <span>{{item.model.title}}</span>
+              </div>
+              <div class="action-post-body">
+                <span>{{item.model.excerpt}}</span>
+              </div>
+            </div>
+          </div>
+        </dt>
+      </dl>
+    </div>
   </div>
 </template>
 
@@ -40,14 +68,20 @@ export default {
   name: "UserInfoBox",
   data() {
     return {
-      user: null
+      user: null,
+      action_list: null
     };
   },
   created() {
     this.user = this.$store.state.user;
     getAction().then(res => {
-      console.log(res.data);
+      this.action_list = res.data.data;
     });
+  },
+  methods: {
+    load() {
+      this.action_list = 2;
+    }
   }
 };
 </script>
@@ -89,5 +123,49 @@ dt {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 2%;
+}
+
+.user-info-box-content {
+  background-color: #fff;
+  border-radius: 5px;
+  width: 50%;
+  position: absolute;
+  right: 28%;
+  color: #7b7979;
+  font-weight: 100;
+  font-size: 14px;
+  padding: 12px;
+  top: 83%;
+  text-align: left;
+}
+
+.action-content {
+}
+
+.action-post {
+  border-radius: 5px;
+  width: 75%;
+  height: 100px;
+  border: 1px solid #e0dbdb;
+  margin: 3% auto;
+}
+
+.action-post .el-image {
+  border-radius: 4%;
+  width: 20%;
+  height: 98%;
+  margin-left: 0.1%;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.action-post-header {
+  display: inline-block;
+  position: absolute;
+}
+
+.action-post-body {
+  display: inline-block;
+  position: absolute;
 }
 </style>

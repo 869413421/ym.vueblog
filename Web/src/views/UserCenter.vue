@@ -117,4 +117,8 @@ export default {
   display: inline-block;
   padding: 3.8px;
 }
+
+.post-wrapper form{
+  margin: 0 auto;
+}
 </style>

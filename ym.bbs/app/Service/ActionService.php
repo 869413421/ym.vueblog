@@ -10,6 +10,7 @@ namespace App\Service;
 
 
 use App\Models\Action;
+use App\Models\Collection;
 use App\Models\Comment;
 use App\Models\Good;
 use App\Models\Topic;
@@ -18,8 +19,7 @@ class ActionService
 {
     public function getActionModelInfo(Action $action)
     {
-        switch ($action->model)
-        {
+        switch ($action->model) {
             case Topic::class:
                 return $this->getTopicInfoToAction($action);
                 break;
@@ -28,12 +28,25 @@ class ActionService
                 break;
             case Comment::class:
                 return $this->getCommentIofoToAction($action);
+                break;
+            case Collection::class:
+                return $this->getCollectionIofoToAction($action);
         }
+    }
+
+    public function getCollectionIofoToAction($action)
+    {
+        $info['type'] = 'collect';
+
+        return $info;
     }
 
     public function getCommentIofoToAction(Action $action)
     {
 
+        $info['type'] = 'comment';
+
+        return $info;
     }
 
     public function getTopicInfoToAction(Action $action)
@@ -41,19 +54,27 @@ class ActionService
         $info = Topic::query()
             ->where('topics.id', $action->model_id)
             ->join('users', 'topics.user_id', 'users.id')
+            ->select('users.name','users.avatar','topics.title','topics.excerpt')
             ->first()
             ->toArray();
+
+        $info['type'] = 'topic';
 
         return $info;
     }
 
     public function getGoodInfoToAction(Action $action)
     {
-        return Good::query()
+        $info = Good::query()
             ->where('goods.id', $action->model_id)
             ->join('topics', 'topic_id', 'topics.id')
             ->join('users', 'topics.user_id', 'users.id')
+            ->select('users.name','users.avatar','topics.title','topics.excerpt')
             ->first()
             ->toArray();
+
+        $info['type'] = 'good';
+
+        return $info;
     }
 }
