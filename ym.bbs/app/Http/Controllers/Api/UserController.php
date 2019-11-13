@@ -6,8 +6,10 @@ use App\Common\CacheCommon;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Api\UserRequest;
 use App\Models\User;
+use App\Transformers\ActionTransformer;
 use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends BaseController
@@ -63,5 +65,12 @@ class UserController extends BaseController
         $user->save();
 
         return $this->response->item($this->user(), New UserTransformer);
+    }
+
+    public function action(\Illuminate\Http\Request $request)
+    {
+        /** @var  $user User */
+        $user = $this->user;
+        return $this->response->paginator($user->Action()->orderByDesc('created_at')->paginate($request->page_size), new ActionTransformer());
     }
 }

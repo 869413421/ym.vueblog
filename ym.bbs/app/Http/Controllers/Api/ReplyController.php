@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Api\ReplyRequest;
+use App\Models\Action;
 use App\Models\Comment;
 use App\Models\Reply;
 use App\Models\Topic;
@@ -17,7 +18,7 @@ class ReplyController extends BaseController
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    public function store(ReplyRequest $request, Topic $topic, Comment $comment)
+    public function store(ReplyRequest $request, Topic $topic, Comment $comment, Action $action)
     {
         $reply = new Reply();
         $reply->user_id = $this->user()->id;
@@ -31,6 +32,7 @@ class ReplyController extends BaseController
         $reply->reply_user_name = $reply_user->name;
         $reply->save();
 
+        $action->createAction($this->user()->id,Reply::class,'create',$reply->id);
         return $this->response->item($reply, new ReplyTransformer())->setStatusCode(201);
     }
 }

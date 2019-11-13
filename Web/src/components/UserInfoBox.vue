@@ -39,24 +39,45 @@
         </dt>
         <dt v-for="item in action_list" :key="item.id">
           <div class="action-content" v-if="item.model">
-            <el-image style="width: 100px; height: 100px;" :src="user.avatar"></el-image>
-            <span>{{user.name}}</span>
-            <span v-if="item.model.type==='good'">点赞了文章</span>
-            <span v-if="item.model.type==='collect'">收藏了文章</span>
-            <span v-if="item.model.type==='topic'">发布了文章</span>
-            <span>{{item.diff_create_date}}</span>
+            <div class="action-content-span">
+              <el-image style="width: 30px; height: 30px;margin-right: 2%;" :src="user.avatar"></el-image>
+              <span>{{user.name}}</span>
+              <span v-if="item.model.type==='good'">点赞了文章</span>
+              <span v-if="item.model.type==='collect'">收藏了文章</span>
+              <span v-if="item.model.type==='topic'">发布了文章</span>
+              <span v-if="item.model.type==='comment'">评论了文章</span>
+              <span v-if="item.model.type==='reply'">回复了</span>
+              <span style="margin-left: 59%;font-weight: 100;">{{item.diff_create_date}}</span>
+            </div>
 
             <div class="action-post">
               <el-image :src="item.model.avatar"></el-image>
-              <div class="action-post-header">
-                <span>{{item.model.title}}</span>
+              <div class="action-info-content">
+                <div style="margin-left: 3%;font-size: 18px;font-weight: 700;margin-top:2%">
+                  <span>{{item.model.title}}</span>
+                </div>
+                <div style="margin-left: 3%;font-size: 16px;font-weight: 700;margin-top: 1.5%;">
+                  <span v-if="item.model.type!='reply'">{{item.model.excerpt}}</span>
+                  <span v-else v-html="emoji(item.model.comment_content)"></span>
+                </div>
               </div>
-              <div class="action-post-body">
-                <span>{{item.model.excerpt}}</span>
+            </div>
+
+            <div class="action-post" v-show="item.model.type=='reply'||item.model.type=='comment'">
+              <div class="action-info-content">
+                <div style="margin-left: 3%;font-size: 18px;font-weight: 700;margin-top:2%">
+                  <span v-if="item.model.type!='reply'">{{item.model.title}}</span>
+                  <span v-else v-html="emoji(item.model.comment_content)"></span>
+                </div>
+                <div style="margin-left: 3%;font-size: 16px;font-weight: 700;margin-top: 1.5%;">
+                  <span>{{emoji(item.model.content)}}</span>
+                </div>
               </div>
+              <el-image :src="user.avatar"></el-image>
             </div>
           </div>
         </dt>
+        <el-button size="small" style="width:100%;margin-top:7%" @click="load()">查看更多</el-button>
       </dl>
     </div>
   </div>
@@ -64,23 +85,36 @@
 
 <script>
 import { getAction } from "../js/api/action";
+import { emoji } from "../utils/emoji";
 export default {
   name: "UserInfoBox",
   data() {
     return {
       user: null,
-      action_list: null
+      action_list: null,
+      page: 1,
+      page_size: 2,
+      current_page: 1
     };
   },
   created() {
     this.user = this.$store.state.user;
-    getAction().then(res => {
+    getAction(this.page, this.page_size).then(res => {
       this.action_list = res.data.data;
+      this.current_page = res.data.meta.pagination.current_page;
     });
   },
   methods: {
     load() {
-      this.action_list = 2;
+      this.current_page = this.current_page + 1;
+      console.log(this.current_page);
+      getAction(this.current_page, this.page_size).then(res => {
+        for (var i = 0; i < res.data.data.length; i++) {
+           console.log(res.data.data[i])
+          this.action_list.push(res.data.data[i]);
+        }
+        this.current_page = res.data.meta.pagination.current_page;
+      });
     }
   }
 };
@@ -140,6 +174,8 @@ dt {
 }
 
 .action-content {
+  padding: 20px;
+  border-bottom: 1px solid #ece9e9;
 }
 
 .action-post {
@@ -148,9 +184,10 @@ dt {
   height: 100px;
   border: 1px solid #e0dbdb;
   margin: 3% auto;
+  display: flex;
 }
 
-.action-post .el-image {
+.action-content .el-image {
   border-radius: 4%;
   width: 20%;
   height: 98%;
@@ -167,5 +204,13 @@ dt {
 .action-post-body {
   display: inline-block;
   position: absolute;
+}
+.action-content-span {
+  display: flex;
+  align-items: center;
+  margin-left: 1%;
+}
+.action-info-content {
+  width: 80%;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="reply_content">
     <el-input
       type="textarea"
       :autosize="{ minRows: 10, maxRows: 20}"

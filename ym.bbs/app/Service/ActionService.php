@@ -13,6 +13,7 @@ use App\Models\Action;
 use App\Models\Collection;
 use App\Models\Comment;
 use App\Models\Good;
+use App\Models\Reply;
 use App\Models\Topic;
 
 class ActionService
@@ -31,11 +32,39 @@ class ActionService
                 break;
             case Collection::class:
                 return $this->getCollectionIofoToAction($action);
+                break;
+            case Reply::class:
+                return $this->getReplyInfoToAction($action);
+                break;
         }
     }
 
-    public function getCollectionIofoToAction($action)
+    public function getReplyInfoToAction(Action $action)
     {
+        $info=Reply::query()
+            ->join('comments','replies.comment_id','comments.id')
+            ->join('users','comments.user_id','users.id')
+            ->join('topics','comments.topic_id','topics.id')
+            ->where('replies.id',$action->model_id)
+            ->select('users.name', 'users.avatar', 'comments.content as comment_content','replies.content','topics.title', 'topics.excerpt')
+            ->first()
+            ->toArray();
+
+        $info['type'] = 'reply';
+
+        return $info;
+    }
+
+    public function getCollectionIofoToAction(Action $action)
+    {
+        $info = Collection::query()
+            ->join('topics', 'collections.topic_id', 'topics.id')
+            ->join('users', 'topics.user_id', 'users.id')
+            ->where('collections.id', $action->model_id)
+            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt')
+            ->first()
+            ->toArray();
+
         $info['type'] = 'collect';
 
         return $info;
@@ -43,6 +72,13 @@ class ActionService
 
     public function getCommentIofoToAction(Action $action)
     {
+        $info = Comment::query()
+            ->join('topics', 'comments.topic_id', 'topics.id')
+            ->join('users', 'topics.user_id', 'users.id')
+            ->where('comments.id', $action->model_id)
+            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt','comments.content')
+            ->first()
+            ->toArray();
 
         $info['type'] = 'comment';
 
@@ -54,7 +90,7 @@ class ActionService
         $info = Topic::query()
             ->where('topics.id', $action->model_id)
             ->join('users', 'topics.user_id', 'users.id')
-            ->select('users.name','users.avatar','topics.title','topics.excerpt')
+            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt')
             ->first()
             ->toArray();
 
@@ -69,7 +105,7 @@ class ActionService
             ->where('goods.id', $action->model_id)
             ->join('topics', 'topic_id', 'topics.id')
             ->join('users', 'topics.user_id', 'users.id')
-            ->select('users.name','users.avatar','topics.title','topics.excerpt')
+            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt')
             ->first()
             ->toArray();
 

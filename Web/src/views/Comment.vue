@@ -1,55 +1,53 @@
 <template>
   <div class="comment-wrapper">
-    <div class="comment_edit">
-      <reply></reply>
-    </div>
-
-    <div class="comment" v-for="item in comments" :key="item.id">
-      <el-avatar shape="square" size="large" :src="item.user.avatar"></el-avatar>
-      <el-card class="box-card">
-        <div slot="header" class="card_header">
-          <span>{{item.user.name}}</span>
-          <div class="comment_header">
-            <div class="el-icon-time"></div>
-            {{item.diff_create_date}}
-            <a
-              href="javascript:void(0)"
-              class="el-icon-chat-dot-round"
-              @click="openReplyWrapper(item.id)"
-            >评论</a>
-          </div>
-        </div>
-        <div v-html="item.content"></div>
-
-        <div class="reply_wrapper" v-if="currentReply==item.id">
-          <el-input v-model="reply_content" placeholder="请输入内容"></el-input>
-          <el-button type="primary" @click="replyTopic(item.id,item.user.id)">评论</el-button>
-        </div>
-
-        <div v-for="reply in item.reply.data" :key="reply.id">
-          <el-divider></el-divider>
+    <div>
+      <div class="comment" v-for="item in comments" :key="item.id">
+        <el-avatar shape="square" size="large" :src="item.user.avatar"></el-avatar>
+        <el-card class="box-card">
           <div slot="header" class="card_header">
-            <el-avatar shape="square" size="small" :src="reply.user_avatar"></el-avatar>
-            <span>{{reply.user_name}}</span>
-            <span style="font-size: 0.5em;color:#adb1af">回复</span>
-            <span>{{reply.reply_user_name}}</span>
+            <span>{{item.user.name}}</span>
             <div class="comment_header">
               <div class="el-icon-time"></div>
-              {{reply.diff_create_date}}
+              {{item.diff_create_date}}
               <a
                 href="javascript:void(0)"
                 class="el-icon-chat-dot-round"
-                @click="openReplyWrapper(reply.id)"
+                @click="openReplyWrapper(item.id)"
               >评论</a>
             </div>
-            <div v-html="emoji(reply.content)"></div>
-            <div class="reply_wrapper" v-if="currentReply==reply.id">
-              <el-input v-model="reply_content" placeholder="请输入内容"></el-input>
-              <el-button type="primary" @click="replyTopic(item.id,reply.user_id)">评论</el-button>
+          </div>
+          <div v-html="item.content"></div>
+
+          <div class="reply_wrapper" v-if="currentReply==item.id">
+            <el-input v-model="reply_content" placeholder="请输入内容"></el-input>
+            <el-button type="primary" @click="replyTopic(item.id,item.user.id)">评论</el-button>
+          </div>
+
+          <div v-for="reply in item.reply.data" :key="reply.id">
+            <el-divider></el-divider>
+            <div slot="header" class="card_header">
+              <el-avatar shape="square" size="small" :src="reply.user_avatar"></el-avatar>
+              <span>{{reply.user_name}}</span>
+              <span style="font-size: 0.5em;color:#adb1af">回复</span>
+              <span>{{reply.reply_user_name}}</span>
+              <div class="comment_header">
+                <div class="el-icon-time"></div>
+                {{reply.diff_create_date}}
+                <a
+                  href="javascript:void(0)"
+                  class="el-icon-chat-dot-round"
+                  @click="openReplyWrapper(reply.id)"
+                >评论</a>
+              </div>
+              <div v-html="emoji(reply.content)"></div>
+              <div class="reply_wrapper" v-if="currentReply==reply.id">
+                <el-input v-model="reply_content" placeholder="请输入内容"></el-input>
+                <el-button type="primary" @click="replyTopic(item.id,reply.user_id)">评论</el-button>
+              </div>
             </div>
           </div>
-        </div>
-      </el-card>
+        </el-card>
+      </div>
     </div>
   </div>
 </template>
@@ -125,7 +123,7 @@ export default {
 .comment-wrapper {
   position: absolute;
   width: 100%;
-  top: 125%;
+  top: 260%;
 }
 .box-card {
   width: 92%;

@@ -54,8 +54,18 @@
         class="user_button"
         v-if="this.$store.state.user&&topic.user&&topic.user.id===this.$store.state.user.id"
       >
-        <el-button type="primary" icon="el-icon-edit" size="small" circle  @click="changRoute('topic_edit?id='+topic.id)"></el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-edit"
+          size="small"
+          circle
+          @click="changRoute('topic_edit?id='+topic.id)"
+        ></el-button>
         <el-button type="danger" icon="el-icon-delete" size="small" circle @click="destoryTopic"></el-button>
+      </div>
+
+      <div class="comment_edit">
+        <reply></reply>
       </div>
 
       <Comment></Comment>
@@ -75,6 +85,7 @@
 </template>
 <script>
 import Comment from "./Comment";
+import reply from "../components/reply";
 import { getTopic } from "../js/api/topic";
 import { deleteTopic } from "../js/api/topic";
 import { emoji } from "../utils/emoji";
@@ -174,7 +185,8 @@ export default {
     }
   },
   components: {
-    Comment
+    Comment,
+    reply,
   }
 };
 </script>
