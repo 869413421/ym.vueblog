@@ -93,7 +93,7 @@ export default {
                 type: "success"
               });
               setTimeout(() => {
-                this.changRoute("topic_show?id" + this.form.id);
+                this.changRoute("topic_show?id=" + this.form.id);
               }, 1000);
             });
           } else {

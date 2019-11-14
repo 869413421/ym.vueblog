@@ -6,9 +6,11 @@
           <span>我的创作</span>
         </div>
         <div class="boxcard-body">
-          <router-link :to="{name: 'UserInfoBox'}">基础信息</router-link>
+          <router-link :to="{name: 'UserInfoBox',query: {id: this.$route.query.id }}">基础信息</router-link>
         </div>
-        <div class="boxcard-body">我的文章</div>
+        <div class="boxcard-body">
+          <router-link :to="{name: 'UserTopicList',query: {id: this.$route.query.id }}">我的文章</router-link>
+        </div>
         <div class="boxcard-body">我的动态</div>
         <div class="boxcard-body">我的收藏</div>
         <div class="boxcard-body">我的点赞</div>
@@ -43,7 +45,11 @@
             <br />
             <span :title="user.last_active_time" v-html="user.diff_last_active_time"></span>
             <br />
-            <el-button size="small" style="width:100%;margin-top:7%" @click="changRoute('/user_edit')">编辑资料</el-button>
+            <el-button
+              size="small"
+              style="width:100%;margin-top:7%"
+              @click="changRoute('/user_edit')"
+            >编辑资料</el-button>
           </div>
         </div>
       </el-card>
@@ -117,8 +123,11 @@ export default {
   display: inline-block;
   padding: 3.8px;
 }
-
-.post-wrapper form{
+.post-wrapper form {
   margin: 0 auto;
+}
+.user-center a {
+  color: #7b7979;
+  text-decoration: none;
 }
 </style>

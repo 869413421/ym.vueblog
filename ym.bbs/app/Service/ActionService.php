@@ -46,7 +46,7 @@ class ActionService
             ->join('users','comments.user_id','users.id')
             ->join('topics','comments.topic_id','topics.id')
             ->where('replies.id',$action->model_id)
-            ->select('users.name', 'users.avatar', 'comments.content as comment_content','replies.content','topics.title', 'topics.excerpt')
+            ->select('users.name', 'users.avatar', 'comments.content as comment_content','replies.content','topics.title', 'topics.excerpt','topics.id as topic_id')
             ->first()
             ->toArray();
 
@@ -61,7 +61,7 @@ class ActionService
             ->join('topics', 'collections.topic_id', 'topics.id')
             ->join('users', 'topics.user_id', 'users.id')
             ->where('collections.id', $action->model_id)
-            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt')
+            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt','topics.id as topic_id')
             ->first()
             ->toArray();
 
@@ -76,7 +76,7 @@ class ActionService
             ->join('topics', 'comments.topic_id', 'topics.id')
             ->join('users', 'topics.user_id', 'users.id')
             ->where('comments.id', $action->model_id)
-            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt','comments.content')
+            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt','comments.content','topics.id as topic_id')
             ->first()
             ->toArray();
 
@@ -90,7 +90,7 @@ class ActionService
         $info = Topic::query()
             ->where('topics.id', $action->model_id)
             ->join('users', 'topics.user_id', 'users.id')
-            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt')
+            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt','topics.id as topic_id')
             ->first()
             ->toArray();
 
@@ -105,7 +105,7 @@ class ActionService
             ->where('goods.id', $action->model_id)
             ->join('topics', 'topic_id', 'topics.id')
             ->join('users', 'topics.user_id', 'users.id')
-            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt')
+            ->select('users.name', 'users.avatar', 'topics.title', 'topics.excerpt','topics.id as topic_id')
             ->first()
             ->toArray();
 

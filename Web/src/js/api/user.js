@@ -7,3 +7,14 @@ export function getUserIofo(query) {
         params: query
     })
 }
+
+export function getUserTopic(user_id, page, page_size) {
+    return axios({
+        url: 'user/' + user_id + '/topic',
+        method: 'get',
+        params: {
+            page: page,
+            page_size: page_size
+        }
+    })
+}

@@ -45,6 +45,7 @@ $api->version('v1',
             $api->get('topic', 'TopicController@index')->name('api.topic.index');
             $api->get('topic/{topic}', 'TopicController@show')->name('api.topic.show');
             $api->get('topic/{topic}/comment', 'CommentController@index')->name('api.Comment.index');
+            $api->get('user/{user}/topic', 'UserController@topic')->name('api.User.topic');
             //登陆后可以访问接口
             $api->group(['middleware' => 'api.auth'], function ($api)
             {

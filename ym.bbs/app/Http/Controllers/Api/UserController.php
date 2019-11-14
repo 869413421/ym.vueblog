@@ -7,10 +7,11 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\Api\UserRequest;
 use App\Models\User;
 use App\Transformers\ActionTransformer;
+use App\Transformers\TopicTransformer;
 use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
@@ -21,7 +22,8 @@ class UserController extends BaseController
         $password = $request->password;
         $verification_code = $request->verification_code;
 
-        if ($name == 'superAdmin') {
+        if ($name == 'superAdmin')
+        {
             $user = new User();
             $user->name = $name;
             $user->password = Hash::make($password);
@@ -33,11 +35,13 @@ class UserController extends BaseController
 
         $key = $phone . $verification_code;
         $code = CacheCommon::getCache($key);
-        if (!$code) {
+        if (!$code)
+        {
             return $this->response->error('验证码不存在', 422);
         }
 
-        if (!$code === $verification_code) {
+        if (!$code === $verification_code)
+        {
             return $this->response->error('验证码错误', 422);
         }
 
@@ -67,10 +71,18 @@ class UserController extends BaseController
         return $this->response->item($this->user(), New UserTransformer);
     }
 
-    public function action(\Illuminate\Http\Request $request)
+    public function action(Request $request)
     {
         /** @var  $user User */
         $user = $this->user;
         return $this->response->paginator($user->Action()->orderByDesc('created_at')->paginate($request->page_size), new ActionTransformer());
+    }
+
+    public function topic(User $user, Request $request)
+    {
+        $trans = new UserTransformer();
+        $user_arr = $trans->transform($user);
+
+        return $this->response->paginator($user->Topic()->orderByDesc('created_at')->paginate($request->page_size), new TopicTransformer())->setMeta(['user'=>$user_arr]);
     }
 }

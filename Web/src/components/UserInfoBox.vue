@@ -50,34 +50,41 @@
               <span style="margin-left: 59%;font-weight: 100;">{{item.diff_create_date}}</span>
             </div>
 
-            <div class="action-post">
-              <el-image :src="item.model.avatar"></el-image>
-              <div class="action-info-content">
-                <div style="margin-left: 3%;font-size: 18px;font-weight: 700;margin-top:2%">
-                  <span>{{item.model.title}}</span>
-                </div>
-                <div style="margin-left: 3%;font-size: 16px;font-weight: 700;margin-top: 1.5%;">
-                  <span v-if="item.model.type!='reply'">{{item.model.excerpt}}</span>
-                  <span v-else v-html="emoji(item.model.comment_content)"></span>
+            <a href="javascript:void(0)" @click="changRoute('/topic_show?id='+item.model.topic_id)">
+              <div class="action-post">
+                <el-image :src="item.model.avatar"></el-image>
+                <div class="action-info-content">
+                  <div class="font-hide">
+                    <span>{{item.model.title}}</span>
+                  </div>
+                  <div class="font-hide">
+                    <span v-if="item.model.type!='reply'">{{item.model.excerpt}}</span>
+                    <span v-else v-html="emoji(item.model.comment_content)"></span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
 
             <div class="action-post" v-show="item.model.type=='reply'||item.model.type=='comment'">
               <div class="action-info-content">
-                <div style="margin-left: 3%;font-size: 18px;font-weight: 700;margin-top:2%">
+                <div class="font-hide">
                   <span v-if="item.model.type!='reply'">{{item.model.title}}</span>
                   <span v-else v-html="emoji(item.model.comment_content)"></span>
                 </div>
-                <div style="margin-left: 3%;font-size: 16px;font-weight: 700;margin-top: 1.5%;">
-                  <span>{{emoji(item.model.content)}}</span>
+                <div class="font-hide">
+                  <span v-html="emoji(item.model.content)"></span>
                 </div>
               </div>
               <el-image :src="user.avatar"></el-image>
             </div>
           </div>
         </dt>
-        <el-button size="small" style="width:100%;margin-top:7%" @click="load()">查看更多</el-button>
+        <el-button
+          v-show="last_page>current_page"
+          size="small"
+          style="width:100%;margin-top:7%"
+          @click="load()"
+        >查看更多</el-button>
       </dl>
     </div>
   </div>
@@ -94,7 +101,8 @@ export default {
       action_list: null,
       page: 1,
       page_size: 2,
-      current_page: 1
+      current_page: 1,
+      last_page: 1
     };
   },
   created() {
@@ -102,6 +110,7 @@ export default {
     getAction(this.page, this.page_size).then(res => {
       this.action_list = res.data.data;
       this.current_page = res.data.meta.pagination.current_page;
+      this.last_page = res.data.meta.pagination.total_pages;
     });
   },
   methods: {
@@ -110,7 +119,7 @@ export default {
       console.log(this.current_page);
       getAction(this.current_page, this.page_size).then(res => {
         for (var i = 0; i < res.data.data.length; i++) {
-           console.log(res.data.data[i])
+          console.log(res.data.data[i]);
           this.action_list.push(res.data.data[i]);
         }
         this.current_page = res.data.meta.pagination.current_page;
@@ -212,5 +221,16 @@ dt {
 }
 .action-info-content {
   width: 80%;
+}
+.font-hide {
+  margin-left: 3%;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 1.5%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 3%;
 }
 </style>
