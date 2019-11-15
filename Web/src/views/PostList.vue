@@ -116,4 +116,14 @@ export default {
   padding: 20px;
   height: 100%;
 }
+
+.cell>div{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.el-avatar>img{
+    width: 100%;
+}
 </style>

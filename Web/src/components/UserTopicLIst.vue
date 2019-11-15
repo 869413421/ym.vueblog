@@ -3,7 +3,7 @@
     <div class="user-topic-list-body">
       <div class="user-topic-list-body-top" v-if="user">
         <span class="el-icon-notebook-2"></span>
-        <span>{{user.name}} 发布的文章 ({{user.topic_count}})</span>
+        <span>{{user.name}} {{type_name}} ({{total}})</span>
       </div>
 
       <div class="user-top-info" v-for="item in topic_list" :key="item.id">
@@ -36,13 +36,16 @@ export default {
   name: "UserTopicList",
   data() {
     return {
+      user_id: this.$route.query.id,
       topic_list: null,
       user: null,
       page: 1,
       page_size: 10,
       current_page: 1,
       total: 0,
-      page_count: 0
+      page_count: 0,
+      type: this.$route.query.type,
+      type_name: "发布的文章"
     };
   },
   created() {
@@ -52,14 +55,41 @@ export default {
     changPage(page) {
       this.current_page = page;
       var user_id = this.$route.query.id;
-      getUserTopic(user_id, this.current_page, this.page_size).then(res => {
-        this.topic_list = res.data.data;
-        this.user = res.data.meta.user;
-        this.current_page = res.data.meta.pagination.current_page;
-        this.last_page = res.data.meta.pagination.total_pages;
-        this.total = res.data.meta.pagination.total;
-        this.page_count = res.data.meta.pagination.total_pages;
-      });
+
+      getUserTopic(user_id, this.current_page, this.page_size, this.type).then(
+        res => {
+          this.topic_list = res.data.data;
+          this.user = res.data.meta.user;
+          this.current_page = res.data.meta.pagination.current_page;
+          this.last_page = res.data.meta.pagination.total_pages;
+          this.total = res.data.meta.pagination.total;
+          this.page_count = res.data.meta.pagination.total_pages;
+        }
+      );
+    }
+  },
+  watch: {
+    $route() {
+      this.type = this.$route.query.type;
+      this.user_id = this.$route.query.id;
+    },
+    type() {
+      console.log(this.type);
+      switch (this.type) {
+        case "topic":
+          this.type_name = "发布的文章";
+          break;
+        case "good":
+          this.type_name = "点赞的文章";
+          break;
+        case "collection":
+          this.type_name = "收藏的文章";
+          break;
+      }
+      this.changPage(1);
+    },
+    user_id() {
+      window.location.reload();
     }
   }
 };

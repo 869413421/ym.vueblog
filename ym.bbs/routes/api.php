@@ -45,13 +45,16 @@ $api->version('v1',
             $api->get('topic', 'TopicController@index')->name('api.topic.index');
             $api->get('topic/{topic}', 'TopicController@show')->name('api.topic.show');
             $api->get('topic/{topic}/comment', 'CommentController@index')->name('api.Comment.index');
+            $api->get('user/{user}', 'UserController@userShow')->name('api.User.show');
             $api->get('user/{user}/topic', 'UserController@topic')->name('api.User.topic');
+            $api->get('user/{user}/good', 'UserController@good')->name('api.User.good');
+            $api->get('user/{user}/collection', 'UserController@collection')->name('api.User.collection');
+            $api->get('user/{user}/action', 'UserController@action')->name('api.User.action');
             //登陆后可以访问接口
             $api->group(['middleware' => 'api.auth'], function ($api)
             {
                 $api->get('user', 'UserController@me')->name('api.User.show');
                 $api->patch('user', 'UserController@update')->name('api.User.update');
-                $api->get('user/action', 'UserController@action')->name('api.User.action');
 
                 $api->post('image', 'ImageController@store')->name('api.Image.store');
 

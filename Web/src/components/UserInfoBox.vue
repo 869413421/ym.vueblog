@@ -1,5 +1,5 @@
 <template>
-  <div class="user-info-box">
+  <div class="user-info-box" v-if="user">
     <div class="user-info-box-header">
       <div class>
         <span :title="user.created_at">注册于：{{user.regirster_date}}</span> ，
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { getAction } from "../js/api/action";
+import { getUserAction } from "../js/api/user";
 import { emoji } from "../utils/emoji";
 export default {
   name: "UserInfoBox",
@@ -106,18 +106,21 @@ export default {
     };
   },
   created() {
-    this.user = this.$store.state.user;
-    getAction(this.page, this.page_size).then(res => {
+    getUserAction(this.$route.query.id, this.page, this.page_size).then(res => {
       this.action_list = res.data.data;
       this.current_page = res.data.meta.pagination.current_page;
       this.last_page = res.data.meta.pagination.total_pages;
+      this.user = res.data.meta.user;
     });
   },
   methods: {
     load() {
       this.current_page = this.current_page + 1;
-      console.log(this.current_page);
-      getAction(this.current_page, this.page_size).then(res => {
+      getUserAction(
+        this.$route.query.id,
+        this.current_page,
+        this.page_size
+      ).then(res => {
         for (var i = 0; i < res.data.data.length; i++) {
           console.log(res.data.data[i]);
           this.action_list.push(res.data.data[i]);

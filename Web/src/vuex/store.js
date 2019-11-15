@@ -28,6 +28,9 @@ const actions = {
     },
     DispachUser(conext, n) {
         return conext.commit('UserMutation', n)
+    },
+    DispachbyIdUser(conext, n) {
+        return conext.commit('byIdUserMutation', n)
     }
 }
 

@@ -8,9 +8,27 @@ export function getUserIofo(query) {
     })
 }
 
-export function getUserTopic(user_id, page, page_size) {
+export function getUserIofoById(id) {
     return axios({
-        url: 'user/' + user_id + '/topic',
+        url: 'user/'+id,
+        method: 'get',
+    })
+}
+
+export function getUserTopic(user_id, page, page_size,type) {
+    return axios({
+        url: 'user/' + user_id + '/'+type,
+        method: 'get',
+        params: {
+            page: page,
+            page_size: page_size
+        }
+    })
+}
+
+export function getUserAction(user_id, page, page_size,type) {
+    return axios({
+        url: 'user/' + user_id + '/action',
         method: 'get',
         params: {
             page: page,

@@ -94,8 +94,8 @@
           </div>
 
           <div v-else>
-            <el-button type="info" size="small" @click="changRoute('login')">登陆</el-button>
-            <el-button type="info" size="small" @click="changRoute('register')">注册</el-button>
+            <el-button type="info" size="small" @click="changRoute('/login')">登陆</el-button>
+            <el-button type="info" size="small" @click="changRoute('/register')">注册</el-button>
           </div>
         </el-col>
       </el-header>
@@ -120,10 +120,8 @@ export default {
   },
   created() {
     this.axios.get("narbars").then(res => {
-      console.log(res.status);
       if (res.status == 200 || res.status == 302) {
         this.narbar = res.data;
-        console.log(this.narbar);
       }
     });
   }

@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
         Comment::observe(CommentObserver::class);
         Good::observe(GoodObserver::class);
         Collection::observe(CollectionObserver::class);
-        User::observe(UserObserver::class);
+//        User::observe(UserObserver::class);
 
         app('Dingo\Api\Transformer\Factory')->setAdapter(function ($app)
         {

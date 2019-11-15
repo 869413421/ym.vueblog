@@ -9,11 +9,20 @@
           <router-link :to="{name: 'UserInfoBox',query: {id: this.$route.query.id }}">基础信息</router-link>
         </div>
         <div class="boxcard-body">
-          <router-link :to="{name: 'UserTopicList',query: {id: this.$route.query.id }}">我的文章</router-link>
+          <router-link
+            :to="{name: 'UserTopicList',query: {id: this.$route.query.id,type:'topic' }}"
+          >我的文章</router-link>
         </div>
-        <div class="boxcard-body">我的动态</div>
-        <div class="boxcard-body">我的收藏</div>
-        <div class="boxcard-body">我的点赞</div>
+        <div class="boxcard-body">
+          <router-link
+            :to="{name: 'UserTopicList',query: {id: this.$route.query.id,type:'collection' }}"
+          >我的收藏</router-link>
+        </div>
+        <div class="boxcard-body">
+          <router-link
+            :to="{name: 'UserTopicList',query: {id: this.$route.query.id,type:'good' }}"
+          >我的点赞</router-link>
+        </div>
       </el-card>
     </div>
 
@@ -49,7 +58,14 @@
               size="small"
               style="width:100%;margin-top:7%"
               @click="changRoute('/user_edit')"
+              v-if="user.id===this.$store.state.user.id"
             >编辑资料</el-button>
+            <el-button
+              size="small"
+              style="width:100%;margin-top:7%"
+              @click="changRoute('/user_edit')"
+              v-else
+            >关注</el-button>
           </div>
         </div>
       </el-card>
@@ -57,15 +73,18 @@
   </div>
 </template>
 <script>
+import { getUserIofoById } from "../js/api/user";
 export default {
   name: "UserCenter",
   data() {
     return {
-      user: null
+      user: {}
     };
   },
   created() {
-    this.user = this.$store.state.user;
+    getUserIofoById(this.$route.query.id).then(res => {
+      this.user = res.data;
+    });
   }
 };
 </script>

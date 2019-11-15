@@ -77,6 +77,24 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Action::class);
     }
 
+    public function GoodTopic()
+    {
+        return Topic::query()
+            ->join('goods', 'topics.id', 'goods.topic_id')
+            ->where('goods.user_id', $this->id)
+            ->select('topics.*')
+            ->orderByDesc('goods.created_at');
+    }
+
+    public function CollectionTopic()
+    {
+        return Topic::query()
+            ->join('collections', 'topics.id', 'collections.topic_id')
+            ->where('collections.user_id', $this->id)
+            ->select('topics.*')
+            ->orderByDesc('collections.created_at');
+    }
+
     /**
      * 统计用户文章总数
      */
