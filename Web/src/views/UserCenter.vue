@@ -3,7 +3,7 @@
     <div class="user-sidebar">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span>我的创作</span>
+          <span>{{current_user}}的创作</span>
         </div>
         <div class="boxcard-body">
           <router-link :to="{name: 'UserInfoBox',query: {id: this.$route.query.id }}">基础信息</router-link>
@@ -11,17 +11,17 @@
         <div class="boxcard-body">
           <router-link
             :to="{name: 'UserTopicList',query: {id: this.$route.query.id,type:'topic' }}"
-          >我的文章</router-link>
+          >{{current_user}}的文章</router-link>
         </div>
         <div class="boxcard-body">
           <router-link
             :to="{name: 'UserTopicList',query: {id: this.$route.query.id,type:'collection' }}"
-          >我的收藏</router-link>
+          >{{current_user}}的收藏</router-link>
         </div>
         <div class="boxcard-body">
           <router-link
             :to="{name: 'UserTopicList',query: {id: this.$route.query.id,type:'good' }}"
-          >我的点赞</router-link>
+          >{{current_user}}的点赞</router-link>
         </div>
       </el-card>
     </div>
@@ -58,7 +58,7 @@
               size="small"
               style="width:100%;margin-top:7%"
               @click="changRoute('/user_edit')"
-              v-if="user.id===this.$store.state.user.id"
+              v-if="this.$store.state.user&&user.id===this.$store.state.user.id"
             >编辑资料</el-button>
             <el-button
               size="small"
@@ -78,13 +78,31 @@ export default {
   name: "UserCenter",
   data() {
     return {
-      user: {}
+      user: {},
+      store_user: this.$store.state.user,
+      current_user: "我",
+      user_id: this.$route.query.id
     };
   },
   created() {
     getUserIofoById(this.$route.query.id).then(res => {
       this.user = res.data;
     });
+    if (!this.store_user) {
+      this.current_user = "TA";
+      return;
+    }
+    if (this.store_user.id !== this.user.id) {
+      this.current_user = "TA";
+    }
+  },
+  watch: {
+    $route() {
+      this.user_id = this.$route.query.id;
+    },
+    user_id() {
+      window.location.reload();
+    }
   }
 };
 </script>

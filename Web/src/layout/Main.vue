@@ -1,10 +1,9 @@
 <template>
-  <div  id="container">
+  <div id="container">
     <Header></Header>
 
     <el-main id="main">
-      Main
-      <router-view/>
+      <router-view />
     </el-main>
 
     <Footer></Footer>
@@ -23,7 +22,8 @@ export default {
 };
 </script>
 <style>
-#main{
-  width: 100%
+#main {
+  width: 100%;
+  height: 100%;
 }
 </style>

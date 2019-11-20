@@ -4,7 +4,7 @@
       <el-table :data="topicList" stripe :border="true" :highlight-current-row="true">
         <el-table-column>
           <template slot="header">
-            <div style="margin:0 auto">
+            <div>
               <el-button plain size="mini" id="Active" ref="Active" @click="changType('Active')">活跃</el-button>
               <el-button plain size="mini" id="Hot" @click="changType('Hot')">热门</el-button>
               <el-button plain size="mini" id="Essence" @click="changType('Essence')">精华</el-button>
@@ -13,32 +13,36 @@
             </div>
           </template>
           <template slot-scope="data">
-            <div>
-              <el-avatar
-                style="float:left"
-                :src="data.row.user.avatar"
-              ></el-avatar>
+
+            <router-link :to="{path:'/user_center/user_info',query:{id:data.row.user.id}}">
+              <el-avatar :src="data.row.user.avatar"></el-avatar>
+            </router-link>
+
+            <div class="post-wraper">
               <router-link :to="{path:'topic_show',query:{id:data.row.id}}">
-              <div style="float:left;margin-left:20px">
-                <span style="float:left">{{data.row.title}}</span>
-                <br />
-                <span>{{data.row.excerpt}}</span>
-              </div>
+                <div class="post-content">
+                  <span>{{data.row.title}}</span>
+                  <br />
+                  <span>{{data.row.excerpt}}</span>
+                </div>
               </router-link>
-              <div style="float:right;margin-top:20px">
-                <i class="el-icon-view"></i>
-                <span style="font-size:6px;margin-left:5px">{{data.row.view_count}}</span>
-                <i class="el-icon-chat-dot-round"></i>
-                <span style="font-size:6px;margin-left:5px">{{data.row.comment_count}}</span>
-                <i class="el-icon-star-off"></i>
-              </div>
+            </div>
+            <div class="icon-wraper">
+              <i class="el-icon-view"></i>
+              <span class="icon-span">{{data.row.view_count}}</span>
+              <i class="el-icon-chat-dot-round"></i>
+              <span class="icon-span">{{data.row.comment_count}}</span>
+              <i class="el-icon-star-off"></i>
+              <span class="icon-span">{{data.row.collect_count}}</span>
+              <i class="el-icon-thumb"></i>
+              <span class="icon-span">{{data.row.good_count}}</span>
             </div>
           </template>
         </el-table-column>
       </el-table>
     </div>
 
-    <div style="margin-bottom: 10px;">
+    <div style="margin-top: 2%;">
       <el-pagination
         background
         layout="prev, pager, next"
@@ -89,7 +93,7 @@ export default {
           params: {
             page: page,
             type: type,
-            include:'user,category'
+            include: "user,category"
           }
         })
         .then(res => {
@@ -108,22 +112,31 @@ export default {
 </script>
 <style>
 .post_list {
-  height: 100%;
-}
-.post_table {
-  display: flex;
+  width: 70%;
   margin: 0 auto;
-  padding: 20px;
-  height: 100%;
 }
-
-.cell>div{
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+.post-wraper {
+  display: inline-block;
+  width: 80%;
 }
-
-.el-avatar>img{
-    width: 100%;
+.post-content {
+  display: inline-block;
+  margin-left: 2%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.icon-wraper {
+  margin-left: 1%;
+  display: inline-block;
+}
+.icon-span {
+  font-size: 6px;
+  margin-left: 5px;
+}
+.post_list a {
+  color: black;
+  text-decoration: none;
 }
 </style>
